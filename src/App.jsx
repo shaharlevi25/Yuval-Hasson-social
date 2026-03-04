@@ -417,7 +417,7 @@ export default function App() {
         <div style={{ maxWidth: 1000, margin: "0 auto" }}>
           <Reveal>
             <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-              {/* <p style={{ color: "var(--brown)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1rem" }}>מה אני עושה</p> */}
+              <p style={{ color: "var(--brown)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1rem" }}>מה אני עושה</p>
               <h2 className="serif" style={{ fontSize: "clamp(1.9rem, 4vw, 3rem)", fontWeight: 700, lineHeight: 1.2 }}>
                 שירותים שמייצרים<br /><span style={{ color: "var(--brown)" }}>נוכחות אמיתית</span>
               </h2>
@@ -455,7 +455,7 @@ export default function App() {
         {/* Header */}
         <div style={{ position: "relative", zIndex: 2, textAlign: "center", padding: "4rem 2rem 2.5rem" }}>
           <Reveal>
-            {/* <p style={{ color: "rgba(250,246,240,0.6)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "1rem" }}>עבודות</p> */}
+            <p style={{ color: "rgba(250,246,240,0.6)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "1rem" }}>עבודות</p>
             <h2 className="serif" style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)", fontWeight: 700, lineHeight: 1.1, color: "#FAF6F0" }}>
               העבודות שלנו<br />
               <span style={{ color: "rgba(250,246,240,0.75)", fontStyle: "italic" }}>מדברות בעד עצמן</span>
