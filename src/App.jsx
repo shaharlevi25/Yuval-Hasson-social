@@ -30,20 +30,66 @@ function Reveal({ children, delay = 0, y = 28 }) {
 const WA_NUMBER = "972549422502";
 const WA_LINK = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("היי יובל! ראיתי את דף הנחיתה שלך ורציתי לשמוע עוד 😊")}`;
 
-// ── Portfolio — הכניסי תמונות לתיקיית public/portfolio/ ──
+// סרטוני/תמונות עבודות — הכניסי קבצים לתיקיית public/portfolio/
 const PORTFOLIO = [
-  { src: "/Portfolio/1.jpg", label: "אינסטגרם", client: "אימון כושר אישי" },
-  { src: "/portfolio/work2.jpg", label: "טיקטוק",   client: "לקוח 2" },
-  { src: "/portfolio/work3.jpg", label: "מיתוג",    client: "לקוח 3" },
-  { src: "/portfolio/work4.jpg", label: "אינסטגרם", client: "לקוח 4" },
-  { src: "/portfolio/work5.jpg", label: "טיקטוק",   client: "לקוח 5" },
-  { src: "/portfolio/work6.jpg", label: "מיתוג",    client: "לקוח 6" },
+  { src: "/portfolio/work1.mp4",  thumb: "/portfolio/thumb1.jpg", type: "video", label: "טיקטוק",    client: "לקוח 1" },
+  { src: "/portfolio/work2.mp4",  thumb: "/portfolio/thumb2.jpg", type: "video", label: "אינסטגרם",  client: "לקוח 2" },
+  { src: "/portfolio/work3.jpg",  thumb: "/portfolio/work3.jpg",  type: "image", label: "מיתוג",     client: "לקוח 3" },
+  { src: "/portfolio/work4.mp4",  thumb: "/portfolio/thumb4.jpg", type: "video", label: "טיקטוק",    client: "לקוח 4" },
+  { src: "/portfolio/work5.jpg",  thumb: "/portfolio/work5.jpg",  type: "image", label: "אינסטגרם",  client: "לקוח 5" },
+  { src: "/portfolio/work6.mp4",  thumb: "/portfolio/thumb6.jpg", type: "video", label: "אינסטגרם",  client: "לקוח 6" },
+];
+
+const REVIEWS = [
+  {
+    name: "לקוחה מרוצה",
+    text: "אני רוצה להמליץ על יובל! לפני מקצועיות ואיכות היא קודם כל בן אדם! מקשיבה, מכילה ומבינה את הצרכים של העסק, מקצועית ויצירתית עם מחשבה מחוץ לקופסה והתאמה לקונספט ולקהל היעד. והכי חשוב מביאה תוצאות והכל מתנהל בוייב פשוט מושלם. לא תתאכזבו, מומלצת!",
+    stars: 5,
+  },
+  {
+    name: "לקוחה יקרה",
+    text: "יובלי היקרה, מעבר לזה שאת צלמת סופר מוכשרת, את גם אשת שירות ומכירות מעולה. לא בכל יום פוגשים אדם אחד שמשלב בתוכו כל כך הרבה מיומנויות, וכל זה בטבעיות ומקצועיות רבה. מאוד משקיעה בנו כלקוחות ודואגת לרדוף אחרינו, ולא אנחנו אחרייך. את מנהלת את עצמך ואותנו יופי יופי :)",
+    stars: 5,
+  },
+  {
+    name: "לקוח מרוצה",
+    text: "ממליץ מאד על יובל — מקצוענית, עניינית, תמיד זמינה, סבלנית, והכי חשוב תוצאות מהירות!!!",
+    stars: 5,
+  },
+];
+
+// חבילות — עדכן את המחירים והפרטים
+const PACKAGES = [
+  {
+    name: "סטארטר",
+    desc: "מתאים לעסקים שמתחילים את הדרך ברשתות",
+    features: ["ניהול עמוד אחד", "8 פוסטים בחודש", "אסטרטגיה בסיסית", "דיווח חודשי"],
+    cta: "בואו נדבר",
+    highlight: false,
+  },
+  {
+    name: "פרו",
+    desc: "הפתרון המקיף לעסק שרוצה לצמוח",
+    features: ["ניהול 2 פלטפורמות", "16 פוסטים בחודש", "צילום תוכן חודשי", "אסטרטגיה מלאה", "דיווח שבועי"],
+    cta: "הכי פופולרי",
+    highlight: true,
+  },
+  {
+    name: "פרימיום",
+    desc: "חבילה מקסימלית לעסקים שרוצים את הכל",
+    features: ["ניהול 3 פלטפורמות", "תוכן ללא הגבלה", "צילום שבועי", "מיתוג מלא", "ליווי אישי"],
+    cta: "בואו נדבר",
+    highlight: false,
+  },
 ];
 
 export default function App() {
-  const [scrolled,  setScrolled]  = useState(false);
-  const [menuOpen,  setMenuOpen]  = useState(false);
-  const [openFaq,   setOpenFaq]   = useState(null);
+  const [scrolled,    setScrolled]    = useState(false);
+  const [menuOpen,    setMenuOpen]    = useState(false);
+  const [openFaq,     setOpenFaq]     = useState(null);
+  const [slideIndex,  setSlideIndex]  = useState(0);
+  const [reviewIndex, setReviewIndex] = useState(0);
+  const reviewTimer = useRef(null);
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 50);
@@ -51,30 +97,40 @@ export default function App() {
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
+  // Auto-rotate reviews every 25s
+  useEffect(() => {
+    reviewTimer.current = setInterval(() => {
+      setReviewIndex(i => (i + 1) % REVIEWS.length);
+    }, 25000);
+    return () => clearInterval(reviewTimer.current);
+  }, []);
+
   const navTo = (id) => {
     setMenuOpen(false);
     setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), 60);
   };
 
+  const prevSlide = () => setSlideIndex(i => (i - 1 + PORTFOLIO.length) % PORTFOLIO.length);
+  const nextSlide = () => setSlideIndex(i => (i + 1) % PORTFOLIO.length);
+
   const services = [
-    { icon: "📸", title: "צילום תוכן",      text: "סרטונים ותמונות ברמה מקצועית — שמציגות אותך בצורה הכי טובה שיש." },
-    { icon: "📱", title: "ניהול אינסטגרם", text: "תוכן עקבי, מיתוג אחיד, כתוביות מקצועיות — כל מה שצריך לעמוד מנצח." },
-    { icon: "🎵", title: "ניהול טיקטוק",   text: "טרנדים, מוזיקה, אלגוריתם — אני על זה. את רק צריכה להיות את עצמך." },
-    { icon: "🎯", title: "אסטרטגיה ומיתוג", text: "בונות יחד זהות ברורה — צבע, שפה, קהל יעד. הכל קוהרנטי ומדויק." },
+    { icon: "🎬", title: "צילום ועריכת תוכן",  text: "צילום ועריכת סרטונים ותמונות ברמה מקצועית שמציגות אותך בצורה הכי טובה שיש." },
+    { icon: "🎵", title: "ניהול טיקטוק",        text: "טרנדים, מוזיקה, אלגוריתם — אני על זה. אתם רק צריכים להיות אתם." },
+    { icon: "🎯", title: "אסטרטגיה ומיתוג",     text: "בונים יחד זהות ברורה — צבע, שפה, קהל יעד. הכל מדויק לפי הצורך שלכם." },
   ];
 
   const steps = [
-    { num: "01", title: "מתחילים לדבר",       text: "שיחת היכרות חופשית — מבינה את העסק, הקהל, והחלומות שלך." },
-    { num: "02", title: "בונות אסטרטגיה",     text: "ביחד מפתחות מחשבה אסטרטגית. מי יודע למכור אותנו יותר מעצמנו?" },
-    { num: "03", title: "יוצרות תוכן אמיתי", text: "בשפה שלך, לא AI. אותנטי, אמין ומוכר." },
-    { num: "04", title: "מציגות את המקפצה",  text: "לפני ואחרי. נתונים, חשיפות, מיתוג. רואים את התוצאות." },
+    { num: "01", title: "מתחילים לדבר",       text: "שיחת היכרות חופשית. מכירים את העסק לעומק — מקהל יעד ועד המתחרים שלך." },
+    { num: "02", title: "בונים אסטרטגיה",      text: "ביחד נפתח מחשבה אסטרטגית. כי מי יודע למכור אותנו יותר מעצמנו?" },
+    { num: "03", title: "יוצרים תוכן אמיתי",  text: "בשפה שלנו, לא AI. אותנטי, אמין ומוכר." },
+    { num: "04", title: "מציגים את המקפצה",   text: "לכל תהליך יש לפני ואחרי. נתונים, חשיפות, מיתוג — רואים את התוצאות." },
   ];
 
   const faqs = [
-    { q: "למה לא לכתוב תסריטים עם AI?",        a: "כי הקהל שלך לא רובוט. אם תישמעי כמו רובוט — תפספסי את האותנטיות שהם מחפשים. השפה שלך תמיד תנצח." },
-    { q: "כמה זמן לוקח לראות תוצאות?",          a: "תהליך הסושיאל ממכר — ברגע שמתחילים, רואים שינוי. בסוף כל תהליך אני מציגה השוואת לפני ואחרי מלאה." },
-    { q: "האם סושיאל מדיה מתאים לכל עסק?",       a: "בהחלט. פעם פרסמו בשלטי חוצות — היום כל הלקוחות הפוטנציאליים נמצאים ברשתות החברתיות." },
-    { q: "מה הופך את הגישה שלך לשונה?",          a: "אני חיה את הרשתות ומעורבת בתוכן הטרנדי של היום. אני לא מנהלת דפים — אני בונה נוכחות אמיתית שנשמעת כמוך." },
+    { q: "למה לא לכתוב תסריטים עם AI?",   a: "כי הקהל שלך לא רובוט. אם תישמעי כמו רובוט תפספסי את האותנטיות שהם מחפשים. השפה שלך תמיד תנצח." },
+    { q: "כמה זמן לוקח לראות תוצאות?",     a: "תהליך הסושיאל ממכר — ברגע שמתחילים רואים שינוי. בסוף כל תהליך אני מציגה השוואת לפני ואחרי מלאה." },
+    { q: "האם סושיאל מדיה מתאים לכל עסק?", a: "בהחלט. פעם פרסמו בשלטי חוצות — היום כל הלקוחות הפוטנציאליים נמצאים ברשתות החברתיות." },
+    { q: "מה הופך את הגישה שלך לשונה?",    a: "אני חיה את הרשתות ומעורבת בתוכן הטרנדי של היום. אני לא מנהלת דפים — אני בונה נוכחות אמיתית שנשמעת כמוך." },
   ];
 
   const NAV = [
@@ -82,8 +138,15 @@ export default function App() {
     { label: "שירותים", id: "services"  },
     { label: "עבודות",  id: "portfolio" },
     { label: "תהליך",   id: "process"   },
-    { label: "שאלות",   id: "faq"       },
+    { label: "חבילות",  id: "packages"  },
+    { label: "ביקורות", id: "reviews"   },
   ];
+
+  // visible portfolio cards (up to 3 at a time on desktop)
+  const visibleCount = 3;
+  const visibleItems = Array.from({ length: visibleCount }, (_, i) =>
+    PORTFOLIO[(slideIndex + i) % PORTFOLIO.length]
+  );
 
   return (
     <div dir="rtl" style={{ fontFamily: "'Heebo', sans-serif", background: "#FAF6F0", color: "#2C1F14", minHeight: "100vh", overflowX: "hidden" }}>
@@ -93,13 +156,13 @@ export default function App() {
         :root {
           --cream: #FAF6F0; --sand: #EDE5D8; --linen: #F2EBE1;
           --brown: #6B4F3A; --dark: #2C1F14; --mid: #7A6354; --light: #B8A898;
+          --wa: #25D366;
         }
         html { scroll-behavior: smooth; }
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-thumb { background: var(--brown); border-radius: 4px; }
         .serif { font-family: 'Noto Serif Hebrew', Georgia, serif; }
 
-        /* Buttons */
         .btn-primary {
           display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
           background: var(--brown); color: #FAF6F0; border: none;
@@ -109,6 +172,17 @@ export default function App() {
           transition: background 0.3s, transform 0.25s, box-shadow 0.3s;
         }
         .btn-primary:hover { background: #4f3828; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(107,79,58,0.25); }
+
+        .btn-wa {
+          display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+          background: var(--wa); color: white; border: none;
+          padding: 1.1rem 3rem; border-radius: 4px;
+          font-family: inherit; font-size: 1rem; font-weight: 700;
+          cursor: pointer; white-space: nowrap;
+          transition: background 0.3s, transform 0.25s, box-shadow 0.3s;
+        }
+        .btn-wa:hover { background: #1ebe5d; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37,211,102,0.35); }
+
         .btn-secondary {
           display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
           background: transparent; color: var(--brown); border: 1.5px solid var(--brown);
@@ -118,7 +192,6 @@ export default function App() {
         }
         .btn-secondary:hover { background: var(--brown); color: #FAF6F0; }
 
-        /* Service card */
         .service-card {
           background: white; border: 1px solid rgba(107,79,58,0.1);
           border-radius: 8px; padding: 2rem; height: 100%;
@@ -126,14 +199,13 @@ export default function App() {
         }
         .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(107,79,58,0.1); border-color: rgba(107,79,58,0.25); }
 
-        /* Portfolio */
         .p-card {
-          border-radius: 10px; overflow: hidden; position: relative;
-          background: var(--sand); aspect-ratio: 9/16;
+          border-radius: 12px; overflow: hidden; position: relative;
+          background: var(--sand); aspect-ratio: 9/16; flex-shrink: 0;
           transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;
         }
         .p-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(107,79,58,0.18); }
-        .p-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .p-card img, .p-card video { width: 100%; height: 100%; object-fit: cover; display: block; }
         .p-overlay {
           position: absolute; inset: 0;
           background: linear-gradient(to top, rgba(44,31,20,0.78) 0%, transparent 55%);
@@ -142,7 +214,36 @@ export default function App() {
         }
         .p-card:hover .p-overlay { opacity: 1; }
 
-        /* FAQ */
+        .carousel-btn {
+          width: 44px; height: 44px; border-radius: 50%;
+          background: white; border: 1.5px solid rgba(107,79,58,0.2);
+          display: flex; align-items: center; justify-content: center;
+          cursor: pointer; font-size: 1rem; color: var(--brown);
+          transition: all 0.25s; flex-shrink: 0;
+          box-shadow: 0 2px 12px rgba(107,79,58,0.1);
+        }
+        .carousel-btn:hover { background: var(--brown); color: white; border-color: var(--brown); }
+
+        .review-card {
+          background: white; border-radius: 12px; padding: 2.2rem;
+          border: 1px solid rgba(107,79,58,0.1);
+          box-shadow: 0 4px 24px rgba(107,79,58,0.06);
+          transition: all 0.5s ease;
+        }
+
+        .package-card {
+          background: white; border: 1.5px solid rgba(107,79,58,0.12);
+          border-radius: 12px; padding: 2.2rem; height: 100%;
+          transition: transform 0.3s, box-shadow 0.3s;
+          position: relative;
+        }
+        .package-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(107,79,58,0.1); }
+        .package-highlight {
+          border-color: var(--brown);
+          background: var(--dark);
+          color: #FAF6F0;
+        }
+
         .faq-item { border-bottom: 1px solid rgba(107,79,58,0.12); overflow: hidden; }
         .faq-item:first-child { border-top: 1px solid rgba(107,79,58,0.12); }
         .faq-btn {
@@ -162,23 +263,20 @@ export default function App() {
         @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
         .float { animation: float 6s ease-in-out infinite; }
 
-        /* Mobile menu */
         .mob-menu {
           position: fixed; inset: 0; z-index: 300;
           background: var(--cream); padding: 5rem 2rem 2rem;
-          display: flex; flex-direction: column; gap: 0;
+          display: flex; flex-direction: column; gap: 0; overflow-y: auto;
           transform: translateX(100%); transition: transform 0.38s cubic-bezier(0.16,1,0.3,1);
         }
         .mob-menu.open { transform: translateX(0); }
         .mob-menu-link {
-          font-size: 1.35rem; font-weight: 700; color: var(--dark);
+          font-size: 1.3rem; font-weight: 700; color: var(--dark);
           text-decoration: none; border-bottom: 1px solid rgba(107,79,58,0.1);
-          padding: 1.1rem 0; display: block;
-          transition: color 0.2s;
+          padding: 1rem 0; display: block; transition: color 0.2s;
         }
         .mob-menu-link:hover { color: var(--brown); }
 
-        /* ── RESPONSIVE ── */
         .desktop-nav { display: flex; }
         .hamburger   { display: none; }
 
@@ -189,50 +287,44 @@ export default function App() {
           .hero-photo  { order: -1; max-width: 260px; margin: 0 auto; }
           .about-grid  { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
           .srv-grid    { grid-template-columns: 1fr 1fr !important; }
-          .port-grid   { grid-template-columns: 1fr 1fr !important; }
           .steps-grid  { grid-template-columns: 1fr 1fr !important; gap: 2rem !important; }
-          .steps-grid > div .connector { display: none !important; }
-          .ba-grid     { grid-template-columns: 1fr !important; }
+          .pkg-grid    { grid-template-columns: 1fr !important; max-width: 420px !important; margin: 0 auto; }
+          .ba-grid     { grid-template-columns: 1fr !important; gap: 1rem !important; }
           .ba-arrow    { display: none !important; }
-          .ba-before   { border-radius: 8px !important; }
-          .ba-after    { border-radius: 8px !important; }
+          .ba-before, .ba-after { border-radius: 8px !important; }
           .float-badge { display: none !important; }
-          section, .quote-bar { padding-left: 1.4rem !important; padding-right: 1.4rem !important; }
+          .carousel-inner { gap: 1rem !important; }
         }
-
-        @media (max-width: 500px) {
-          .srv-grid  { grid-template-columns: 1fr !important; }
-          .port-grid { grid-template-columns: 1fr 1fr !important; }
-          .steps-grid { grid-template-columns: 1fr !important; }
-          .btn-row   { flex-direction: column; }
-          .btn-row .btn-primary,
-          .btn-row .btn-secondary { width: 100%; }
+        @media (max-width: 600px) {
+          .srv-grid    { grid-template-columns: 1fr !important; }
+          .steps-grid  { grid-template-columns: 1fr !important; }
+          .btn-row     { flex-direction: column; }
+          .btn-row .btn-primary, .btn-row .btn-secondary, .btn-row a { width: 100%; }
+          .btn-row .btn-primary, .btn-row .btn-secondary { width: 100%; }
         }
       `}</style>
 
       {/* ── NAVBAR ── */}
       <nav style={{ position: "fixed", top: 0, right: 0, left: 0, zIndex: 200, padding: "1rem 2rem", display: "flex", justifyContent: "space-between", alignItems: "center", background: scrolled ? "rgba(250,246,240,0.95)" : "transparent", backdropFilter: scrolled ? "blur(16px)" : "none", borderBottom: scrolled ? "1px solid rgba(107,79,58,0.1)" : "none", transition: "all 0.4s" }}>
         <img src="/logo.svg" alt="יובל חסון" style={{ height: 42 }} onError={e => e.target.style.display = "none"} />
-
-        {/* Desktop */}
-        <div className="desktop-nav" style={{ gap: "2rem", alignItems: "center" }}>
+        <div className="desktop-nav" style={{ gap: "1.8rem", alignItems: "center" }}>
           {NAV.map(n => (
-            <button key={n.id} onClick={() => navTo(n.id)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--mid)", fontSize: "0.88rem", fontWeight: 500, fontFamily: "inherit", transition: "color 0.25s" }}
+            <button key={n.id} onClick={() => navTo(n.id)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--mid)", fontSize: "0.86rem", fontWeight: 500, fontFamily: "inherit", transition: "color 0.25s" }}
               onMouseEnter={e => e.target.style.color = "var(--dark)"}
               onMouseLeave={e => e.target.style.color = "var(--mid)"}>
               {n.label}
             </button>
           ))}
           <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
-            <button className="btn-primary" style={{ padding: "0.6rem 1.5rem", fontSize: "0.83rem" }}>📱 צרי קשר</button>
+            <button className="btn-wa" style={{ padding: "0.6rem 1.4rem", fontSize: "0.82rem" }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.103 1.514 5.829L.055 23.454a.75.75 0 0 0 .918.918l5.629-1.459A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.712 9.712 0 0 1-4.953-1.356l-.355-.211-3.681.955.977-3.578-.232-.368A9.712 9.712 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+              צרי קשר
+            </button>
           </a>
         </div>
-
-        {/* Hamburger */}
         <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} style={{ background: "none", border: "none", cursor: "pointer", flexDirection: "column", gap: 5, padding: "0.5rem" }}>
           {[0,1,2].map(i => (
-            <span key={i} style={{ display: "block", width: 24, height: 2, background: "var(--dark)", borderRadius: 2, transition: "all 0.3s",
-              transform: menuOpen ? (i===0 ? "rotate(45deg) translate(5px,5px)" : i===2 ? "rotate(-45deg) translate(5px,-5px)" : "scaleX(0)") : "none" }} />
+            <span key={i} style={{ display: "block", width: 24, height: 2, background: "var(--dark)", borderRadius: 2, transition: "all 0.3s", transform: menuOpen ? (i===0 ? "rotate(45deg) translate(5px,5px)" : i===2 ? "rotate(-45deg) translate(5px,-5px)" : "scaleX(0)") : "none" }} />
           ))}
         </button>
       </nav>
@@ -242,7 +334,10 @@ export default function App() {
         <button onClick={() => setMenuOpen(false)} style={{ position: "absolute", top: "1.2rem", left: "1.5rem", background: "none", border: "none", fontSize: "1.4rem", cursor: "pointer", color: "var(--dark)" }}>✕</button>
         {NAV.map(n => <a key={n.id} className="mob-menu-link" href={`#${n.id}`} onClick={() => navTo(n.id)}>{n.label}</a>)}
         <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ textDecoration: "none", marginTop: "1.5rem" }}>
-          <button className="btn-primary" style={{ width: "100%" }}>📱 שלחי הודעה</button>
+          <button className="btn-wa" style={{ width: "100%" }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.103 1.514 5.829L.055 23.454a.75.75 0 0 0 .918.918l5.629-1.459A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.712 9.712 0 0 1-4.953-1.356l-.355-.211-3.681.955.977-3.578-.232-.368A9.712 9.712 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+            שלחי הודעה בוואטסאפ
+          </button>
         </a>
       </div>
 
@@ -252,23 +347,29 @@ export default function App() {
           <div>
             <Reveal>
               <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", background: "rgba(107,79,58,0.08)", border: "1px solid rgba(107,79,58,0.18)", borderRadius: "4px", padding: "0.35rem 1rem", color: "var(--brown)", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "1.6rem" }}>
-                📸 צלמת &amp; מנהלת רשתות חברתיות
+                📸 צלמת ומנהלת רשתות חברתיות
               </div>
             </Reveal>
             <Reveal delay={0.08}>
-              <h1 className="serif" style={{ fontSize: "clamp(2.6rem, 5.5vw, 5rem)", fontWeight: 700, lineHeight: 1.12, marginBottom: "1.4rem" }}>
-                תוכן אותנטי<br /><span style={{ color: "var(--brown)" }}>זה תוכן טהור</span>
+              <h1 className="serif" style={{ fontSize: "clamp(2.4rem, 5vw, 4.5rem)", fontWeight: 700, lineHeight: 1.1, marginBottom: "1.4rem", whiteSpace: "nowrap" }}>
+                תוכן אותנטי <span style={{ color: "var(--brown)" }}>זה תוכן טהור</span>
               </h1>
             </Reveal>
             <Reveal delay={0.14}>
-              <p style={{ fontSize: "1.05rem", lineHeight: 1.95, color: "var(--mid)", maxWidth: 500, marginBottom: "2.5rem" }}>
-                אני יובל חסון — חיה את הרשתות החברתיות ומעורבת בתוכן הטרנדי של היום. הנישה שלי: לגרום לך לנשמע בדיוק כמוך — אמיתי, אמין, ומוכר.
+              <p style={{ fontSize: "1.05rem", lineHeight: 1.95, color: "var(--mid)", maxWidth: 520, marginBottom: "0.8rem" }}>
+                אני יובל חסון — חיה את הרשתות החברתיות ומעורבת בתוכן הטרנדי של היום.
+              </p>
+              <p style={{ fontSize: "1.05rem", lineHeight: 1.95, color: "var(--mid)", maxWidth: 520, marginBottom: "2.5rem" }}>
+                הנישה שלי: לגרום לך להישמע בדיוק כמוך — אמיתי, אמין ומוכר.
               </p>
             </Reveal>
             <Reveal delay={0.2}>
               <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }} className="btn-row">
                 <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
-                  <button className="btn-primary">📱 שלחי הודעה</button>
+                  <button className="btn-wa">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.103 1.514 5.829L.055 23.454a.75.75 0 0 0 .918.918l5.629-1.459A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.712 9.712 0 0 1-4.953-1.356l-.355-.211-3.681.955.977-3.578-.232-.368A9.712 9.712 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+                    שלחי הודעה
+                  </button>
                 </a>
                 <button className="btn-secondary" onClick={() => navTo("process")}>איך זה עובד?</button>
               </div>
@@ -299,17 +400,20 @@ export default function App() {
                 פעם שלטי חוצות.<br /><span style={{ color: "var(--brown)" }}>היום — הרשתות שלך.</span>
               </h2>
               <p style={{ color: "var(--mid)", lineHeight: 2, marginBottom: "1.2rem" }}>
-                אני יובל חסון — צלמת ומשווקת ברשתות החברתיות. חיה את הרשתות, מעורבת בתוכן הטרנדי, ויודעת בדיוק מה גורם לאנשים לעצור ולצפות.
+                אני יובל חסון — צלמת ומשווקת ברשתות החברתיות. חיה את הרשתות, מעורבת בתוכן טרנדי ויודעת בדיוק מה הלקוחות שלך רוצים לפגוש ברשתות שגורם לאנשים לעצור ולצפות בתוכן שלכם.
               </p>
-              <p style={{ color: "var(--mid)", lineHeight: 2 }}>
-                הנישה שלי להעביר את התוכן שהלקוח ירצה לשמוע מכם — כבר ברשתות — כי היום כל הלקוחות הפוטנציאליים נמצאים שם.
+              <p style={{ color: "var(--mid)", lineHeight: 2, marginBottom: "1.2rem" }}>
+                הנישה שלי להעביר את התוכן שהלקוח ירצה לשמוע מכם ושהנוכחות של המקצועיות והשירות שלכם יועבר במסר ברור ללקוח.
+              </p>
+              <p style={{ color: "var(--brown)", fontWeight: 600, fontSize: "0.95rem" }}>
+                כיום יותר מ-80% מהלקוחות הפוטנציאליים שלך נמצאים שם.
               </p>
             </div>
           </Reveal>
           <Reveal delay={0.15}>
             <div style={{ background: "white", borderRadius: 8, padding: "2.5rem", borderRight: "4px solid var(--brown)", boxShadow: "0 8px 32px rgba(107,79,58,0.07)" }}>
               <p className="serif" style={{ fontSize: "1.2rem", lineHeight: 1.8, color: "var(--dark)", fontStyle: "italic", marginBottom: "1.6rem" }}>
-                "כל הלקוחות הפוטנציאליים שעסק יכיר — מגיעים מהרשתות החברתיות"
+                "פעם הפרסום לא היה נגיש כמו היום — היום אתה צריך להנגיש את הפרסום ללקוח שלך"
               </p>
               <div style={{ display: "flex", alignItems: "center", gap: "0.9rem" }}>
                 <div style={{ width: 40, height: 40, borderRadius: "50%", background: "var(--sand)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.1rem" }}>📸</div>
@@ -325,7 +429,7 @@ export default function App() {
 
       {/* ── SERVICES ── */}
       <section id="services" style={{ padding: "6rem 2rem" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+        <div style={{ maxWidth: 1000, margin: "0 auto" }}>
           <Reveal>
             <div style={{ textAlign: "center", marginBottom: "4rem" }}>
               <p style={{ color: "var(--brown)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1rem" }}>מה אני עושה</p>
@@ -334,13 +438,13 @@ export default function App() {
               </h2>
             </div>
           </Reveal>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "1.2rem" }} className="srv-grid">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1.4rem" }} className="srv-grid">
             {services.map((s, i) => (
-              <Reveal key={i} delay={i * 0.08}>
+              <Reveal key={i} delay={i * 0.09}>
                 <div className="service-card">
-                  <div style={{ width: 48, height: 48, borderRadius: 8, background: "var(--linen)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.4rem", marginBottom: "1.2rem" }}>{s.icon}</div>
-                  <h3 style={{ fontWeight: 700, marginBottom: "0.7rem", fontSize: "0.97rem" }}>{s.title}</h3>
-                  <p style={{ color: "var(--mid)", lineHeight: 1.8, fontSize: "0.88rem" }}>{s.text}</p>
+                  <div style={{ width: 52, height: 52, borderRadius: 8, background: "var(--linen)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.5rem", marginBottom: "1.2rem" }}>{s.icon}</div>
+                  <h3 style={{ fontWeight: 700, marginBottom: "0.7rem", fontSize: "1rem" }}>{s.title}</h3>
+                  <p style={{ color: "var(--mid)", lineHeight: 1.8, fontSize: "0.9rem" }}>{s.text}</p>
                 </div>
               </Reveal>
             ))}
@@ -349,16 +453,16 @@ export default function App() {
       </section>
 
       {/* ── QUOTE ── */}
-      <div className="quote-bar" style={{ background: "var(--brown)", padding: "3.5rem 2rem", textAlign: "center" }}>
+      <div style={{ background: "var(--brown)", padding: "3.5rem 2rem", textAlign: "center" }}>
         <Reveal>
-          <p className="serif" style={{ fontSize: "clamp(1.05rem, 2.5vw, 1.65rem)", color: "rgba(250,246,240,0.95)", fontStyle: "italic", lineHeight: 1.8, maxWidth: 780, margin: "0 auto" }}>
-            "הקהל שלנו לא רובוט — ואם הרובוט יתסרט אותנו, נפספס את האותנטיות שהם מחפשים. איזו שפה יותר אמינה? שלנו."
+          <p className="serif" style={{ fontSize: "clamp(1.05rem, 2.5vw, 1.65rem)", color: "rgba(250,246,240,0.95)", fontStyle: "italic", lineHeight: 1.8, maxWidth: 820, margin: "0 auto" }}>
+            "הקהל שלנו לא רובוט — אם הרובוט יתסרט אותנו, נפספס את האותנטיות שאנחנו רוצים להעביר. איזו שפה יותר אמינה מהשפה שלנו? אף רובוט לא יכול לדבר אותה."
           </p>
           <p style={{ color: "rgba(250,246,240,0.45)", marginTop: "1rem", fontSize: "0.8rem", letterSpacing: "0.08em" }}>— יובל חסון</p>
         </Reveal>
       </div>
 
-      {/* ── PORTFOLIO ── */}
+      {/* ── PORTFOLIO CAROUSEL ── */}
       <section id="portfolio" style={{ background: "var(--sand)", padding: "6rem 2rem" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <Reveal>
@@ -371,25 +475,46 @@ export default function App() {
             </div>
           </Reveal>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1.2rem" }} className="port-grid">
-            {PORTFOLIO.map((item, i) => (
-              <Reveal key={i} delay={i * 0.07}>
-                <div className="p-card">
-                  <img src={item.src} alt={item.client}
-                    onError={e => {
-                      e.target.style.display = "none";
-                      const p = e.target.parentElement;
-                      p.style.background = "var(--linen)";
-                      p.innerHTML = `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;padding:1.5rem;text-align:center"><span style="font-size:2.5rem;opacity:0.25">📸</span><p style="color:var(--light);font-size:0.75rem;line-height:1.6">${item.client}<br/><span style="font-size:0.68rem;opacity:0.6">הכניסי תמונה ל-<br/>public/portfolio/work${i+1}.jpg</span></p></div>`;
-                    }} />
-                  <div className="p-overlay">
-                    <span style={{ display: "inline-block", background: "rgba(250,246,240,0.18)", backdropFilter: "blur(8px)", color: "white", fontSize: "0.68rem", fontWeight: 600, padding: "0.2rem 0.7rem", borderRadius: "20px", marginBottom: "0.4rem", width: "fit-content" }}>{item.label}</span>
-                    <p style={{ color: "rgba(250,246,240,0.85)", fontSize: "0.82rem", fontWeight: 500 }}>{item.client}</p>
-                  </div>
+          <Reveal delay={0.1}>
+            <div style={{ display: "flex", alignItems: "center", gap: "1.2rem" }}>
+              <button className="carousel-btn" onClick={prevSlide}>›</button>
+              <div style={{ flex: 1, overflow: "hidden" }}>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1.2rem" }} className="carousel-inner">
+                  {visibleItems.map((item, i) => (
+                    <div key={i} className="p-card">
+                      {item.type === "video" ? (
+                        <video src={item.src} poster={item.thumb} muted playsInline loop
+                          onMouseEnter={e => e.target.play()}
+                          onMouseLeave={e => { e.target.pause(); e.target.currentTime = 0; }}
+                          onError={e => {
+                            e.target.style.display = "none";
+                            e.target.parentElement.innerHTML = `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;padding:1.5rem;text-align:center"><span style="font-size:2.5rem;opacity:0.2">🎬</span><p style="color:var(--light);font-size:0.75rem;line-height:1.6">${item.client}<br/><span style="font-size:0.66rem;opacity:0.6">הכניסי סרטון ל-<br/>public/portfolio/</span></p></div>`;
+                          }} />
+                      ) : (
+                        <img src={item.src} alt={item.client}
+                          onError={e => {
+                            e.target.style.display = "none";
+                            e.target.parentElement.innerHTML = `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;padding:1.5rem;text-align:center"><span style="font-size:2.5rem;opacity:0.2">📸</span><p style="color:var(--light);font-size:0.75rem;line-height:1.6">${item.client}<br/><span style="font-size:0.66rem;opacity:0.6">הכניסי תמונה ל-<br/>public/portfolio/</span></p></div>`;
+                          }} />
+                      )}
+                      <div className="p-overlay">
+                        <span style={{ display: "inline-block", background: "rgba(250,246,240,0.18)", backdropFilter: "blur(8px)", color: "white", fontSize: "0.68rem", fontWeight: 600, padding: "0.2rem 0.7rem", borderRadius: "20px", marginBottom: "0.4rem", width: "fit-content" }}>{item.label}</span>
+                        <p style={{ color: "rgba(250,246,240,0.85)", fontSize: "0.82rem", fontWeight: 500 }}>{item.client}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              </Reveal>
-            ))}
-          </div>
+              </div>
+              <button className="carousel-btn" onClick={nextSlide}>‹</button>
+            </div>
+
+            {/* Dots */}
+            <div style={{ display: "flex", justifyContent: "center", gap: "0.5rem", marginTop: "2rem" }}>
+              {PORTFOLIO.map((_, i) => (
+                <button key={i} onClick={() => setSlideIndex(i)} style={{ width: i === slideIndex ? 24 : 8, height: 8, borderRadius: 4, background: i === slideIndex ? "var(--brown)" : "rgba(107,79,58,0.25)", border: "none", cursor: "pointer", transition: "all 0.3s", padding: 0 }} />
+              ))}
+            </div>
+          </Reveal>
 
           <Reveal delay={0.2}>
             <div style={{ textAlign: "center", marginTop: "3rem" }}>
@@ -416,7 +541,7 @@ export default function App() {
             {steps.map((step, i) => (
               <Reveal key={i} delay={i * 0.1}>
                 <div style={{ padding: "0 1rem", textAlign: "center", position: "relative" }}>
-                  {i > 0 && <div className="connector" style={{ position: "absolute", top: 22, right: "50%", width: "100%", height: 1, background: "rgba(107,79,58,0.18)" }} />}
+                  {i > 0 && <div style={{ position: "absolute", top: 22, right: "50%", width: "100%", height: 1, background: "rgba(107,79,58,0.18)" }} />}
                   <div style={{ width: 44, height: 44, borderRadius: "50%", background: "var(--brown)", color: "#FAF6F0", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: "0.82rem", margin: "0 auto 1.4rem", position: "relative", zIndex: 1, boxShadow: "0 4px 14px rgba(107,79,58,0.3)" }}>{step.num}</div>
                   <h3 style={{ fontWeight: 700, marginBottom: "0.6rem", fontSize: "0.97rem" }}>{step.title}</h3>
                   <p style={{ color: "var(--mid)", fontSize: "0.85rem", lineHeight: 1.75 }}>{step.text}</p>
@@ -429,38 +554,131 @@ export default function App() {
 
       {/* ── BEFORE / AFTER ── */}
       <section style={{ background: "var(--sand)", padding: "6rem 2rem" }}>
-        <div style={{ maxWidth: 860, margin: "0 auto" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <Reveal>
-            <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
+            <div style={{ textAlign: "center", marginBottom: "1rem" }}>
               <p style={{ color: "var(--brown)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1rem" }}>התוצאה</p>
               <h2 className="serif" style={{ fontSize: "clamp(1.9rem, 4vw, 3rem)", fontWeight: 700, lineHeight: 1.2 }}>
-                לפני ואחרי —<br /><span style={{ color: "var(--brown)" }}>תראי את המקפצה</span>
+                לפני ואחרי —<br /><span style={{ color: "var(--brown)" }}>תראו את המקפצה</span>
               </h2>
+              <p style={{ color: "var(--mid)", marginTop: "1rem", lineHeight: 1.85, fontSize: "0.97rem", maxWidth: 600, margin: "1rem auto 0" }}>
+                כבר ברגע שנתחיל, הנה כמה עובדות שמראש ניתן להבין שיקרו
+              </p>
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 50px 1fr", alignItems: "stretch" }} className="ba-grid">
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 50px 1fr", alignItems: "stretch", marginTop: "3rem" }} className="ba-grid">
               <div className="ba-before" style={{ background: "var(--linen)", border: "1px solid rgba(107,79,58,0.12)", borderRadius: "8px 0 0 8px", padding: "2.2rem" }}>
                 <p style={{ fontSize: "0.7rem", color: "var(--light)", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1.2rem" }}>לפני</p>
-                {["תוכן אקראי ולא עקבי","ללא מיתוג ברור","חשיפה נמוכה","ללא אסטרטגיה"].map((t,i)=>(
+                {["תוכן חובבני ולא עקבי","שפה שיווקית לא רציפה","חשיפה נמוכה","ללא אסטרטגיה"].map((t,i)=>(
                   <div key={i} style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "0.75rem" }}>
                     <span style={{ color: "#C4AFA5", fontSize: "0.8rem" }}>✕</span>
-                    <p style={{ color: "var(--mid)", fontSize: "0.88rem" }}>{t}</p>
+                    <p style={{ color: "var(--mid)", fontSize: "0.9rem" }}>{t}</p>
                   </div>
                 ))}
               </div>
               <div className="ba-arrow" style={{ display: "flex", justifyContent: "center", alignItems: "center", background: "var(--brown)", color: "#FAF6F0", fontSize: "1.2rem" }}>←</div>
               <div className="ba-after" style={{ background: "var(--brown)", borderRadius: "0 8px 8px 0", padding: "2.2rem" }}>
                 <p style={{ fontSize: "0.7rem", color: "rgba(250,246,240,0.5)", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1.2rem" }}>אחרי</p>
-                {["תוכן עקבי עם מיתוג אחיד","לוגו וצבע מותג בכל סרטון","חשיפות גבוהות ולידים","אסטרטגיה ברורה ומדידה"].map((t,i)=>(
+                {["תוכן עקבי עם מיתוג אחיד","צבע מותג בכל סרטון","חשיפות גבוהות ומעורבות קהל יעד","תוכן מקצועי ולא חובבני"].map((t,i)=>(
                   <div key={i} style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "0.75rem" }}>
                     <span style={{ color: "rgba(250,246,240,0.7)" }}>✓</span>
-                    <p style={{ color: "rgba(250,246,240,0.88)", fontSize: "0.88rem" }}>{t}</p>
+                    <p style={{ color: "rgba(250,246,240,0.88)", fontSize: "0.9rem" }}>{t}</p>
                   </div>
                 ))}
               </div>
             </div>
           </Reveal>
+        </div>
+      </section>
+
+      {/* ── REVIEWS ── */}
+      <section id="reviews" style={{ padding: "6rem 2rem" }}>
+        <div style={{ maxWidth: 800, margin: "0 auto" }}>
+          <Reveal>
+            <div style={{ textAlign: "center", marginBottom: "4rem" }}>
+              <p style={{ color: "var(--brown)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1rem" }}>ביקורות</p>
+              <h2 className="serif" style={{ fontSize: "clamp(1.9rem, 4vw, 3rem)", fontWeight: 700, lineHeight: 1.2 }}>
+                מה אומרים<br /><span style={{ color: "var(--brown)" }}>הלקוחות</span>
+              </h2>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <div style={{ position: "relative", minHeight: 260 }}>
+              {REVIEWS.map((r, i) => (
+                <div key={i} className="review-card" style={{
+                  position: i === 0 ? "relative" : "absolute",
+                  top: 0, left: 0, right: 0,
+                  opacity: reviewIndex === i ? 1 : 0,
+                  transform: reviewIndex === i ? "translateY(0)" : "translateY(16px)",
+                  pointerEvents: reviewIndex === i ? "auto" : "none",
+                  transition: "opacity 0.6s ease, transform 0.6s ease",
+                }}>
+                  <div style={{ display: "flex", gap: "0.3rem", marginBottom: "1rem" }}>
+                    {[...Array(r.stars)].map((_, j) => <span key={j} style={{ color: "#E8A838", fontSize: "1rem" }}>★</span>)}
+                  </div>
+                  <p className="serif" style={{ fontSize: "1.05rem", lineHeight: 1.85, color: "var(--dark)", fontStyle: "italic", marginBottom: "1.4rem" }}>
+                    "{r.text}"
+                  </p>
+                  <p style={{ fontWeight: 700, fontSize: "0.88rem", color: "var(--brown)" }}>{r.name}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Review dots */}
+            <div style={{ display: "flex", justifyContent: "center", gap: "0.5rem", marginTop: "2rem" }}>
+              {REVIEWS.map((_, i) => (
+                <button key={i} onClick={() => { setReviewIndex(i); clearInterval(reviewTimer.current); }}
+                  style={{ width: i === reviewIndex ? 24 : 8, height: 8, borderRadius: 4, background: i === reviewIndex ? "var(--brown)" : "rgba(107,79,58,0.25)", border: "none", cursor: "pointer", transition: "all 0.3s", padding: 0 }} />
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── PACKAGES ── */}
+      <section id="packages" style={{ background: "var(--sand)", padding: "6rem 2rem" }}>
+        <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+          <Reveal>
+            <div style={{ textAlign: "center", marginBottom: "4rem" }}>
+              <p style={{ color: "var(--brown)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1rem" }}>חבילות</p>
+              <h2 className="serif" style={{ fontSize: "clamp(1.9rem, 4vw, 3rem)", fontWeight: 700, lineHeight: 1.2 }}>
+                בחרי את החבילה<br /><span style={{ color: "var(--brown)" }}>שמתאימה לך</span>
+              </h2>
+              <p style={{ color: "var(--mid)", marginTop: "1rem", fontSize: "0.95rem" }}>
+                פרטי המחירים יתווספו בקרוב — צרי קשר לקבלת הצעת מחיר
+              </p>
+            </div>
+          </Reveal>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1.4rem" }} className="pkg-grid">
+            {PACKAGES.map((pkg, i) => (
+              <Reveal key={i} delay={i * 0.1}>
+                <div className={`package-card ${pkg.highlight ? "package-highlight" : ""}`}>
+                  {pkg.highlight && (
+                    <div style={{ position: "absolute", top: -12, right: "50%", transform: "translateX(50%)", background: "var(--brown)", color: "#FAF6F0", fontSize: "0.72rem", fontWeight: 700, padding: "0.25rem 1rem", borderRadius: "20px", letterSpacing: "0.08em", border: "2px solid var(--sand)" }}>
+                      הכי פופולרי ✦
+                    </div>
+                  )}
+                  <h3 className="serif" style={{ fontSize: "1.5rem", fontWeight: 700, marginBottom: "0.5rem", color: pkg.highlight ? "#FAF6F0" : "var(--dark)" }}>{pkg.name}</h3>
+                  <p style={{ fontSize: "0.88rem", lineHeight: 1.7, marginBottom: "2rem", color: pkg.highlight ? "rgba(250,246,240,0.65)" : "var(--mid)" }}>{pkg.desc}</p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "0.7rem", marginBottom: "2rem" }}>
+                    {pkg.features.map((f, j) => (
+                      <div key={j} style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+                        <span style={{ color: pkg.highlight ? "rgba(250,246,240,0.6)" : "var(--brown)", fontSize: "0.85rem" }}>✓</span>
+                        <p style={{ fontSize: "0.9rem", color: pkg.highlight ? "rgba(250,246,240,0.85)" : "var(--mid)" }}>{f}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ textDecoration: "none", display: "block" }}>
+                    <button style={{ width: "100%", padding: "0.95rem", borderRadius: 4, fontFamily: "inherit", fontWeight: 600, fontSize: "0.95rem", cursor: "pointer", transition: "all 0.3s", background: pkg.highlight ? "#FAF6F0" : "transparent", color: pkg.highlight ? "var(--dark)" : "var(--brown)", border: pkg.highlight ? "none" : "1.5px solid var(--brown)" }}>
+                      {pkg.cta}
+                    </button>
+                  </a>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -503,7 +721,10 @@ export default function App() {
               שלחי הודעה ונתחיל לבנות את הסיפור האמיתי שלך ברשתות
             </p>
             <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
-              <button className="btn-primary" style={{ fontSize: "1rem", padding: "1.1rem 3rem" }}>📱 שלחי הודעה בוואטסאפ</button>
+              <button className="btn-wa" style={{ fontSize: "1.05rem", padding: "1.15rem 3.2rem" }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.103 1.514 5.829L.055 23.454a.75.75 0 0 0 .918.918l5.629-1.459A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.712 9.712 0 0 1-4.953-1.356l-.355-.211-3.681.955.977-3.578-.232-.368A9.712 9.712 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+                שלחי הודעה בוואטסאפ
+              </button>
             </a>
           </Reveal>
         </div>
@@ -513,7 +734,10 @@ export default function App() {
       <footer style={{ background: "#1a120b", padding: "1.5rem 2rem" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.5rem" }}>
           <span style={{ color: "rgba(250,246,240,0.25)", fontSize: "0.77rem" }}>© 2024 יובל חסון | ניהול רשתות חברתיות</span>
-          <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ color: "rgba(250,246,240,0.35)", textDecoration: "none", fontSize: "0.77rem" }}>📱 וואטסאפ</a>
+          <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ color: "rgba(37,211,102,0.6)", textDecoration: "none", fontSize: "0.77rem", display: "flex", alignItems: "center", gap: "0.4rem" }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.103 1.514 5.829L.055 23.454a.75.75 0 0 0 .918.918l5.629-1.459A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.712 9.712 0 0 1-4.953-1.356l-.355-.211-3.681.955.977-3.578-.232-.368A9.712 9.712 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+            וואטסאפ
+          </a>
         </div>
       </footer>
     </div>
