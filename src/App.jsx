@@ -282,6 +282,8 @@ export default function App() {
           .carousel-btn { width: 38px !important; height: 38px !important; font-size: 1.1rem !important; }
           .hero-bg-mobile { display: block !important; }
           .hero-photo { display: none !important; }
+          .port-desktop { display: none !important; }
+          .port-mobile  { display: block !important; }
           .desktop-nav { display: none !important; }
           .hamburger   { display: flex !important; }
           .hero-grid   { grid-template-columns: 1fr !important; }
@@ -356,10 +358,10 @@ export default function App() {
           position: "absolute", inset: 0, zIndex: 0,
           backgroundImage: "url('/yuval-photo.jpeg')",
           backgroundSize: "cover", backgroundPosition: "top center",
-          opacity: 0.22,
+          opacity: 0.40,
           display: "none",
         }} />
-        <div style={{ maxWidth: 1200, margin: "0 auto", width: "100%", display: "grid", gridTemplateColumns: "1.15fr 0.85fr", gap: "4rem", alignItems: "center", position: "relative", zIndex: 1 }} className="hero-grid">
+        <div style={{ maxWidth: 1200, margin: "0 auto", width: "100%", display: "grid", gridTemplateColumns: "1.15fr 0.85fr", gap: "4rem", alignItems: "flex-end", position: "relative", zIndex: 1 }} className="hero-grid">
           <div>
             <Reveal>
               <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", background: "rgba(107,79,58,0.08)", border: "1px solid rgba(107,79,58,0.18)", borderRadius: "4px", padding: "0.35rem 1rem", color: "var(--brown)", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "1.6rem", flexWrap: "wrap" }}>
@@ -478,89 +480,117 @@ export default function App() {
         </Reveal>
       </div>
 
-      {/* ── PORTFOLIO CAROUSEL ── */}
-      <section id="portfolio" style={{ background: "var(--sand)", padding: "6rem 2rem" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+      {/* ── PORTFOLIO — EPIC SECTION ── */}
+      <section id="portfolio" style={{ background: "#1a120b", padding: "0", overflow: "hidden", position: "relative" }}>
+        {/* Grain overlay */}
+        <div style={{ position: "absolute", inset: 0, zIndex: 1, backgroundImage: "url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E")", opacity: 0.4, pointerEvents: "none" }} />
+
+        {/* Header */}
+        <div style={{ position: "relative", zIndex: 2, textAlign: "center", padding: "5rem 2rem 3rem" }}>
           <Reveal>
-            <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-              <p style={{ color: "var(--brown)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1rem" }}>עבודות</p>
-              <h2 className="serif" style={{ fontSize: "clamp(1.9rem, 4vw, 3rem)", fontWeight: 700, lineHeight: 1.2 }}>מה יצרנו יחד</h2>
-              <p style={{ color: "var(--mid)", marginTop: "1rem", maxWidth: 460, margin: "1rem auto 0", lineHeight: 1.85, fontSize: "0.97rem" }}>
-                כל עמוד הוא סיפור אחר — אותנטי, מקצועי, ומדויק לקהל היעד
-              </p>
-            </div>
+            <p style={{ color: "var(--brown)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "1rem" }}>עבודות</p>
+            <h2 className="serif" style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)", fontWeight: 700, lineHeight: 1.1, color: "#FAF6F0" }}>
+              העבודות שלנו<br />
+              <span style={{ color: "var(--brown)", fontStyle: "italic" }}>מדברות בעד עצמן</span>
+            </h2>
+            <p style={{ color: "rgba(250,246,240,0.45)", marginTop: "1rem", fontSize: "0.97rem", lineHeight: 1.7 }}>
+              תוכן אמיתי • תוצאות אמיתיות • לקוחות מרוצים
+            </p>
           </Reveal>
+        </div>
 
-          <Reveal delay={0.1}>
-            {/* Desktop: 3 items | Mobile: 1 item full width */}
-            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-              <button className="carousel-btn" onClick={prevSlide}>›</button>
-              <div style={{ flex: 1, overflow: "hidden" }}>
-                {/* Desktop grid */}
-                <div className="carousel-desktop" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1.2rem" }}>
-                  {visibleItems.map((item, i) => (
-                    <div key={i} className="p-card">
-                      {item.type === "video" ? (
-                        <video src={item.src} poster={item.thumb} muted playsInline loop
-                          onMouseEnter={e => e.target.play()}
-                          onMouseLeave={e => { e.target.pause(); e.target.currentTime = 0; }}
-                          onError={e => {
-                            e.target.style.display = "none";
-                            e.target.parentElement.innerHTML = `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;padding:1.5rem;text-align:center"><span style="font-size:2.5rem;opacity:0.2">🎬</span><p style="color:var(--light);font-size:0.75rem;line-height:1.6">${item.client}</p></div>`;
-                          }} />
-                      ) : (
-                        <img src={item.src} alt={item.client}
-                          onError={e => {
-                            e.target.style.display = "none";
-                          }} />
-                      )}
-                      <div className="p-overlay">
-                        <span style={{ display: "inline-block", background: "rgba(250,246,240,0.18)", backdropFilter: "blur(8px)", color: "white", fontSize: "0.68rem", fontWeight: 600, padding: "0.2rem 0.7rem", borderRadius: "20px", marginBottom: "0.4rem", width: "fit-content" }}>{item.label}</span>
-                        <p style={{ color: "rgba(250,246,240,0.85)", fontSize: "0.82rem", fontWeight: 500 }}>{item.client}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                {/* Mobile: single item full width */}
-                <div className="carousel-mobile" style={{ display: "none" }}>
-                  <div className="p-card" style={{ maxWidth: 320, margin: "0 auto", aspectRatio: "9/16" }}>
-                    {PORTFOLIO[slideIndex].type === "video" ? (
-                      <video
-                        key={slideIndex}
-                        src={PORTFOLIO[slideIndex].src}
-                        controls
-                        playsInline
-                        style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 12 }}
-                        onError={e => {
-                          e.target.style.display = "none";
-                          e.target.parentElement.innerHTML = `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;padding:1.5rem;text-align:center"><span style="font-size:3rem;opacity:0.2">🎬</span><p style="color:var(--light);font-size:0.85rem">${PORTFOLIO[slideIndex].client}</p></div>`;
-                        }}
-                      />
-                    ) : (
-                      <img src={PORTFOLIO[slideIndex].src} alt={PORTFOLIO[slideIndex].client}
-                        style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 12 }} />
-                    )}
-                  </div>
-                </div>
-              </div>
-              <button className="carousel-btn" onClick={nextSlide}>‹</button>
+        {/* ── DESKTOP: cinematic 3-up with featured center ── */}
+        <div className="port-desktop" style={{ position: "relative", zIndex: 2, padding: "0 2rem 4rem", maxWidth: 1200, margin: "0 auto" }}>
+          <div style={{ display: "flex", gap: "1rem", alignItems: "stretch", justifyContent: "center" }}>
+            {/* Prev button */}
+            <button onClick={prevSlide} style={{ background: "rgba(250,246,240,0.06)", border: "1px solid rgba(250,246,240,0.1)", borderRadius: "50%", width: 48, height: 48, color: "#FAF6F0", fontSize: "1.2rem", cursor: "pointer", flexShrink: 0, alignSelf: "center", transition: "all 0.3s", backdropFilter: "blur(8px)" }}
+              onMouseEnter={e => { e.target.background = "rgba(107,79,58,0.4)"; e.target.style.background = "rgba(107,79,58,0.5)"; }}
+              onMouseLeave={e => { e.target.style.background = "rgba(250,246,240,0.06)"; }}>›</button>
+
+            {/* Side card - smaller */}
+            <div style={{ flex: "0 0 22%", aspectRatio: "9/16", borderRadius: 14, overflow: "hidden", opacity: 0.55, transform: "scale(0.92)", transition: "all 0.5s", position: "relative", background: "#2C1F14" }}>
+              {PORTFOLIO[(slideIndex - 1 + PORTFOLIO.length) % PORTFOLIO.length].type === "video" ? (
+                <video src={PORTFOLIO[(slideIndex - 1 + PORTFOLIO.length) % PORTFOLIO.length].src} muted playsInline loop style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              ) : (
+                <img src={PORTFOLIO[(slideIndex - 1 + PORTFOLIO.length) % PORTFOLIO.length].src} style={{ width: "100%", height: "100%", objectFit: "cover" }} alt="" />
+              )}
             </div>
 
-            {/* Dots */}
-            <div style={{ display: "flex", justifyContent: "center", gap: "0.5rem", marginTop: "2rem" }}>
+            {/* CENTER — big featured */}
+            <div style={{ flex: "0 0 38%", aspectRatio: "9/16", borderRadius: 18, overflow: "hidden", position: "relative", background: "#2C1F14", boxShadow: "0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(250,246,240,0.1)" }}>
+              {PORTFOLIO[slideIndex].type === "video" ? (
+                <video key={slideIndex} src={PORTFOLIO[slideIndex].src} controls playsInline autoPlay muted loop
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              ) : (
+                <img src={PORTFOLIO[slideIndex].src} style={{ width: "100%", height: "100%", objectFit: "cover" }} alt={PORTFOLIO[slideIndex].client} />
+              )}
+              {/* glow ring */}
+              <div style={{ position: "absolute", inset: -2, borderRadius: 20, border: "2px solid rgba(107,79,58,0.5)", pointerEvents: "none" }} />
+              {/* label */}
+              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%)", padding: "2rem 1.5rem 1.5rem" }}>
+                <span style={{ display: "inline-block", background: "var(--brown)", color: "white", fontSize: "0.72rem", fontWeight: 700, padding: "0.25rem 0.8rem", borderRadius: "20px", marginBottom: "0.4rem" }}>{PORTFOLIO[slideIndex].label}</span>
+                <p style={{ color: "rgba(250,246,240,0.9)", fontWeight: 600, fontSize: "0.95rem" }}>{PORTFOLIO[slideIndex].client}</p>
+              </div>
+            </div>
+
+            {/* Side card - smaller */}
+            <div style={{ flex: "0 0 22%", aspectRatio: "9/16", borderRadius: 14, overflow: "hidden", opacity: 0.55, transform: "scale(0.92)", transition: "all 0.5s", position: "relative", background: "#2C1F14" }}>
+              {PORTFOLIO[(slideIndex + 1) % PORTFOLIO.length].type === "video" ? (
+                <video src={PORTFOLIO[(slideIndex + 1) % PORTFOLIO.length].src} muted playsInline loop style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              ) : (
+                <img src={PORTFOLIO[(slideIndex + 1) % PORTFOLIO.length].src} style={{ width: "100%", height: "100%", objectFit: "cover" }} alt="" />
+              )}
+            </div>
+
+            <button onClick={nextSlide} style={{ background: "rgba(250,246,240,0.06)", border: "1px solid rgba(250,246,240,0.1)", borderRadius: "50%", width: 48, height: 48, color: "#FAF6F0", fontSize: "1.2rem", cursor: "pointer", flexShrink: 0, alignSelf: "center", transition: "all 0.3s", backdropFilter: "blur(8px)" }}
+              onMouseEnter={e => { e.target.style.background = "rgba(107,79,58,0.5)"; }}
+              onMouseLeave={e => { e.target.style.background = "rgba(250,246,240,0.06)"; }}>‹</button>
+          </div>
+        </div>
+
+        {/* ── MOBILE: full-screen video player ── */}
+        <div className="port-mobile" style={{ display: "none", position: "relative", zIndex: 2, padding: "0 1rem 2rem" }}>
+          <div style={{ position: "relative", borderRadius: 18, overflow: "hidden", background: "#000", boxShadow: "0 24px 60px rgba(0,0,0,0.5)", maxWidth: 340, margin: "0 auto" }}>
+            {PORTFOLIO[slideIndex].type === "video" ? (
+              <video key={slideIndex} src={PORTFOLIO[slideIndex].src} controls playsInline autoPlay muted loop
+                style={{ width: "100%", aspectRatio: "9/16", objectFit: "cover", display: "block" }} />
+            ) : (
+              <img src={PORTFOLIO[slideIndex].src} style={{ width: "100%", aspectRatio: "9/16", objectFit: "cover", display: "block" }} alt={PORTFOLIO[slideIndex].client} />
+            )}
+            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 60%)", padding: "2rem 1.2rem 1.2rem" }}>
+              <span style={{ display: "inline-block", background: "var(--brown)", color: "white", fontSize: "0.7rem", fontWeight: 700, padding: "0.2rem 0.7rem", borderRadius: "20px", marginBottom: "0.3rem" }}>{PORTFOLIO[slideIndex].label}</span>
+              <p style={{ color: "white", fontWeight: 600, fontSize: "0.9rem" }}>{PORTFOLIO[slideIndex].client}</p>
+            </div>
+          </div>
+
+          {/* Mobile swipe dots + arrows */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1rem", marginTop: "1.5rem" }}>
+            <button onClick={prevSlide} style={{ background: "rgba(250,246,240,0.1)", border: "1px solid rgba(250,246,240,0.15)", borderRadius: "50%", width: 40, height: 40, color: "#FAF6F0", fontSize: "1.1rem", cursor: "pointer" }}>›</button>
+            <div style={{ display: "flex", gap: "0.4rem" }}>
               {PORTFOLIO.map((_, i) => (
-                <button key={i} onClick={() => setSlideIndex(i)} style={{ width: i === slideIndex ? 24 : 8, height: 8, borderRadius: 4, background: i === slideIndex ? "var(--brown)" : "rgba(107,79,58,0.25)", border: "none", cursor: "pointer", transition: "all 0.3s", padding: 0 }} />
+                <button key={i} onClick={() => setSlideIndex(i)} style={{ width: i === slideIndex ? 20 : 7, height: 7, borderRadius: 4, background: i === slideIndex ? "var(--brown)" : "rgba(250,246,240,0.25)", border: "none", cursor: "pointer", transition: "all 0.3s", padding: 0 }} />
               ))}
             </div>
-          </Reveal>
+            <button onClick={nextSlide} style={{ background: "rgba(250,246,240,0.1)", border: "1px solid rgba(250,246,240,0.15)", borderRadius: "50%", width: 40, height: 40, color: "#FAF6F0", fontSize: "1.1rem", cursor: "pointer" }}>‹</button>
+          </div>
+        </div>
 
-          <Reveal delay={0.2}>
-            <div style={{ textAlign: "center", marginTop: "3rem" }}>
-              <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
-                <button className="btn-secondary">רוצה תוצאות כאלה? 📱</button>
-              </a>
-            </div>
-          </Reveal>
+        {/* Dots desktop */}
+        <div className="port-desktop" style={{ display: "flex", justifyContent: "center", gap: "0.5rem", paddingBottom: "3rem", position: "relative", zIndex: 2 }}>
+          {PORTFOLIO.map((_, i) => (
+            <button key={i} onClick={() => setSlideIndex(i)} style={{ width: i === slideIndex ? 24 : 7, height: 7, borderRadius: 4, background: i === slideIndex ? "var(--brown)" : "rgba(250,246,240,0.2)", border: "none", cursor: "pointer", transition: "all 0.3s", padding: 0 }} />
+          ))}
+        </div>
+
+        {/* CTA strip */}
+        <div style={{ position: "relative", zIndex: 2, textAlign: "center", padding: "2rem 2rem 5rem", borderTop: "1px solid rgba(250,246,240,0.07)" }}>
+          <p style={{ color: "rgba(250,246,240,0.45)", fontSize: "0.9rem", marginBottom: "1.4rem" }}>מוכן לראות את העסק שלך ככה? 👇</p>
+          <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
+            <button className="btn-wa" style={{ fontSize: "1rem", padding: "1rem 2.8rem" }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.103 1.514 5.829L.055 23.454a.75.75 0 0 0 .918.918l5.629-1.459A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.712 9.712 0 0 1-4.953-1.356l-.355-.211-3.681.955.977-3.578-.232-.368A9.712 9.712 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+              בואו נדבר
+            </button>
+          </a>
         </div>
       </section>
 
@@ -607,10 +637,7 @@ export default function App() {
           <Reveal delay={0.1}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 50px 1fr", alignItems: "stretch", marginTop: "3rem" }} className="ba-grid">
               <div className="ba-before" style={{ background: "var(--linen)", border: "1px solid rgba(107,79,58,0.12)", borderRadius: "8px 0 0 8px", padding: "2.2rem" }}>
-                <div style={{ marginBottom: "1.4rem" }}>
-                  <p style={{ fontSize: "1.4rem", fontWeight: 900, color: "var(--brown)" }}>לפני</p>
-                  <p style={{ fontSize: "0.8rem", color: "var(--light)", marginTop: "0.2rem" }}>(לפני שהתחלתם לעבוד איתי)</p>
-                </div>
+<div style={{ display: "flex", alignItems: "baseline", gap: "0.6rem", marginBottom: "1.4rem", flexWrap: "wrap" }}><p style={{ fontSize: "1.4rem", fontWeight: 900, color: "var(--brown)" }}>לפני</p><p style={{ fontSize: "0.82rem", color: "var(--light)" }}>(לפני שהתחלתם לעבוד איתי)</p></div>
                 {["תוכן חובבני ולא עקבי","שפה שיווקית לא רציפה","חשיפה נמוכה","ללא אסטרטגיה"].map((t,i)=>(
                   <div key={i} style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "0.75rem" }}>
                     <span style={{ color: "#C4AFA5", fontSize: "0.8rem" }}>✕</span>
@@ -620,10 +647,7 @@ export default function App() {
               </div>
               <div className="ba-arrow" style={{ display: "flex", justifyContent: "center", alignItems: "center", background: "var(--brown)", color: "#FAF6F0", fontSize: "1.2rem" }}>←</div>
               <div className="ba-after" style={{ background: "var(--brown)", borderRadius: "0 8px 8px 0", padding: "2.2rem" }}>
-                <div style={{ marginBottom: "1.4rem" }}>
-                  <p style={{ fontSize: "1.4rem", fontWeight: 900, color: "#FAF6F0" }}>אחרי</p>
-                  <p style={{ fontSize: "0.8rem", color: "rgba(250,246,240,0.55)", marginTop: "0.2rem" }}>(אחרי שהתחלתם לעבוד איתי)</p>
-                </div>
+<div style={{ display: "flex", alignItems: "baseline", gap: "0.6rem", marginBottom: "1.4rem", flexWrap: "wrap" }}><p style={{ fontSize: "1.4rem", fontWeight: 900, color: "#FAF6F0" }}>אחרי</p><p style={{ fontSize: "0.82rem", color: "rgba(250,246,240,0.55)" }}>(אחרי שהתחלתם לעבוד איתי)</p></div>
                 {["תוכן עקבי עם מיתוג אחיד","צבע מותג בכל סרטון","חשיפות גבוהות ומעורבות קהל יעד","תוכן מקצועי ולא חובבני"].map((t,i)=>(
                   <div key={i} style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "0.75rem" }}>
                     <span style={{ color: "rgba(250,246,240,0.7)" }}>✓</span>
