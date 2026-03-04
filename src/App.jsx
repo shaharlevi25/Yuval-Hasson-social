@@ -32,7 +32,7 @@ const WA_LINK = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("היי י
 
 // ── Portfolio — הכניסי תמונות לתיקיית public/portfolio/ ──
 const PORTFOLIO = [
-  { src: "/portfolio/work1.jpg", label: "אינסטגרם", client: "לקוח 1" },
+  { src: "/portfolio/1.jpg", label: "אינסטגרם", client: "לקוח 1" },
   { src: "/portfolio/work2.jpg", label: "טיקטוק",   client: "לקוח 2" },
   { src: "/portfolio/work3.jpg", label: "מיתוג",    client: "לקוח 3" },
   { src: "/portfolio/work4.jpg", label: "אינסטגרם", client: "לקוח 4" },
