@@ -54,31 +54,6 @@ const REVIEWS = [
   },
 ];
 
-// חבילות — עדכן את המחירים והפרטים
-const PACKAGES = [
-  {
-    name: "סטארטר",
-    desc: "מתאים לעסקים שמתחילים את הדרך ברשתות",
-    features: ["ניהול עמוד אחד", "8 פוסטים בחודש", "אסטרטגיה בסיסית", "דיווח חודשי"],
-    cta: "בואו נדבר",
-    highlight: false,
-  },
-  {
-    name: "פרו",
-    desc: "הפתרון המקיף לעסק שרוצה לצמוח",
-    features: ["ניהול 2 פלטפורמות", "16 פוסטים בחודש", "צילום תוכן חודשי", "אסטרטגיה מלאה", "דיווח שבועי"],
-    cta: "הכי פופולרי",
-    highlight: true,
-  },
-  {
-    name: "פרימיום",
-    desc: "חבילה מקסימלית לעסקים שרוצים את הכל",
-    features: ["ניהול 3 פלטפורמות", "תוכן ללא הגבלה", "צילום שבועי", "מיתוג מלא", "ליווי אישי"],
-    cta: "בואו נדבר",
-    highlight: false,
-  },
-];
-
 export default function App() {
   const [scrolled,    setScrolled]    = useState(false);
   const [menuOpen,    setMenuOpen]    = useState(false);
@@ -134,7 +109,6 @@ export default function App() {
     { label: "שירותים", id: "services"  },
     { label: "עבודות",  id: "portfolio" },
     { label: "תהליך",   id: "process"   },
-    { label: "חבילות",  id: "packages"  },
     { label: "ביקורות", id: "reviews"   },
   ];
 
@@ -352,7 +326,7 @@ export default function App() {
       </div>
 
       {/* ── HERO ── */}
-      <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "12rem 1.2rem 5rem", position: "relative", overflow: "hidden", justifyContent: "flex-end" }}>
+      <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "13rem 1.2rem 3rem", position: "relative", overflow: "hidden" }}>
         {/* Background image — mobile only, 25% opacity */}
         <div className="hero-bg-mobile" style={{
           position: "absolute", inset: 0, zIndex: 0,
@@ -481,7 +455,7 @@ export default function App() {
       </div>
 
       {/* ── PORTFOLIO — EPIC SECTION ── */}
-      <section id="portfolio" style={{ background: "#6B5240", padding: "0", overflow: "hidden", position: "relative" }}>
+      <section id="portfolio" style={{ background: "#8B6E52", padding: "0", overflow: "hidden", position: "relative" }}>
         {/* Grain overlay */}
         <div style={{ position: "absolute", inset: 0, zIndex: 1, backgroundImage: "radial-gradient(rgba(250,246,240,0.03) 1px, transparent 1px)", backgroundSize: "20px 20px", pointerEvents: "none" }} />
 
@@ -595,7 +569,7 @@ export default function App() {
             {steps.map((step, i) => (
               <Reveal key={i} delay={i * 0.1}>
                 <div style={{ padding: "0 1rem", textAlign: "center", position: "relative" }}>
-                  {i < steps.length - 1 && <div style={{ position: "absolute", top: 22, left: "-50%", width: "100%", height: 1, background: "rgba(107,79,58,0.18)", zIndex: 0 }} />}
+                  <div style={{ position: "absolute", top: 22, left: "-50%", width: "100%", height: 1, background: "rgba(107,79,58,0.18)", zIndex: 0 }} />
                   <div style={{ width: 44, height: 44, borderRadius: "50%", background: "var(--brown)", color: "#FAF6F0", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: "0.82rem", margin: "0 auto 1.4rem", position: "relative", zIndex: 1, boxShadow: "0 4px 14px rgba(107,79,58,0.3)" }}>{step.num}</div>
                   <h3 style={{ fontWeight: 700, marginBottom: "0.6rem", fontSize: "0.97rem" }}>{step.title}</h3>
                   <p style={{ color: "var(--mid)", fontSize: "0.85rem", lineHeight: 1.75 }}>{step.text}</p>
@@ -691,54 +665,7 @@ export default function App() {
         </div>
       </section>
 
-{/* PACKAGES — מוסתר, להסרת ההערות כדי להפעיל
-      {/* ── PACKAGES ── */}
-      <section id="packages" style={{ background: "var(--sand)", padding: "6rem 2rem" }}>
-        <div style={{ maxWidth: 1000, margin: "0 auto" }}>
-          <Reveal>
-            <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-              <p style={{ color: "var(--brown)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1rem" }}>חבילות</p>
-              <h2 className="serif" style={{ fontSize: "clamp(1.9rem, 4vw, 3rem)", fontWeight: 700, lineHeight: 1.2 }}>
-                בחרי את החבילה<br /><span style={{ color: "var(--brown)" }}>שמתאימה לך</span>
-              </h2>
-              <p style={{ color: "var(--mid)", marginTop: "1rem", fontSize: "0.95rem" }}>
-                פרטי המחירים יתווספו בקרוב — צרי קשר לקבלת הצעת מחיר
-              </p>
-            </div>
-          </Reveal>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1.4rem" }} className="pkg-grid">
-            {PACKAGES.map((pkg, i) => (
-              <Reveal key={i} delay={i * 0.1}>
-                <div className={`package-card ${pkg.highlight ? "package-highlight" : ""}`}>
-                  {pkg.highlight && (
-                    <div style={{ position: "absolute", top: -12, right: "50%", transform: "translateX(50%)", background: "var(--brown)", color: "#FAF6F0", fontSize: "0.72rem", fontWeight: 700, padding: "0.25rem 1rem", borderRadius: "20px", letterSpacing: "0.08em", border: "2px solid var(--sand)" }}>
-                      הכי פופולרי ✦
-                    </div>
-                  )}
-                  <h3 className="serif" style={{ fontSize: "1.5rem", fontWeight: 700, marginBottom: "0.5rem", color: pkg.highlight ? "#FAF6F0" : "var(--dark)" }}>{pkg.name}</h3>
-                  <p style={{ fontSize: "0.88rem", lineHeight: 1.7, marginBottom: "2rem", color: pkg.highlight ? "rgba(250,246,240,0.65)" : "var(--mid)" }}>{pkg.desc}</p>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "0.7rem", marginBottom: "2rem" }}>
-                    {pkg.features.map((f, j) => (
-                      <div key={j} style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-                        <span style={{ color: pkg.highlight ? "rgba(250,246,240,0.6)" : "var(--brown)", fontSize: "0.85rem" }}>✓</span>
-                        <p style={{ fontSize: "0.9rem", color: pkg.highlight ? "rgba(250,246,240,0.85)" : "var(--mid)" }}>{f}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ textDecoration: "none", display: "block" }}>
-                    <button style={{ width: "100%", padding: "0.95rem", borderRadius: 4, fontFamily: "inherit", fontWeight: 600, fontSize: "0.95rem", cursor: "pointer", transition: "all 0.3s", background: pkg.highlight ? "#FAF6F0" : "transparent", color: pkg.highlight ? "var(--dark)" : "var(--brown)", border: pkg.highlight ? "none" : "1.5px solid var(--brown)" }}>
-                      {pkg.cta}
-                    </button>
-                  </a>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-*/
-            {/* ── FAQ ── */}
+{/* ── FAQ ── */}
       <section id="faq" style={{ padding: "6rem 2rem" }}>
         <div style={{ maxWidth: 720, margin: "0 auto" }}>
           <Reveal>
@@ -769,12 +696,12 @@ export default function App() {
         <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: "60vw", height: "60vw", maxWidth: 500, maxHeight: 500, background: "radial-gradient(circle, rgba(107,79,58,0.2) 0%, transparent 65%)", zIndex: 0, borderRadius: "50%" }} />
         <div style={{ position: "relative", zIndex: 1 }}>
           <Reveal>
-            <p style={{ color: "var(--brown)", fontSize: "clamp(1.4rem, 3vw, 2rem)", fontWeight: 700, letterSpacing: "0.05em", marginBottom: "1rem" }}>מוכנים להתחיל להגדיל?</p>
+            <p style={{ color: "var(--brown)", fontSize: "clamp(1.3rem, 2.5vw, 1.8rem)", fontWeight: 700, letterSpacing: "0.05em", marginBottom: "1rem" }}>מוכנים להתחיל להגדיל?</p>
             <h2 className="serif" style={{ fontSize: "clamp(2rem, 5vw, 3.8rem)", color: "#FAF6F0", fontWeight: 700, lineHeight: 1.15, marginBottom: "1.3rem" }}>
               בואו נבנה יחד<br /><span style={{ color: "var(--brown)" }}>את התוכן המתאים לעסק שלכם</span>
             </h2>
-            <p style={{ color: "rgba(250,246,240,0.5)", fontSize: "1rem", marginBottom: "2.8rem", lineHeight: 1.8 }}>
-              
+            <p style={{ color: "rgba(250,246,240,0.45)", fontSize: "1rem", marginBottom: "2.8rem", lineHeight: 1.85, maxWidth: 520, margin: "1.2rem auto 2.8rem" }}>
+              נצרף תוכן מקצועי, עקבי ואותנטי — שמדבר בדיוק בשפה של הקהל שלך ומביא לקוחות.
             </p>
             <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
               <button className="btn-wa" style={{ fontSize: "1.05rem", padding: "1.15rem 3.2rem" }}>
