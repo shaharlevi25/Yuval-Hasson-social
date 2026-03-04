@@ -296,6 +296,10 @@ export default function App() {
           .carousel-inner { gap: 1rem !important; }
         }
         @media (max-width: 600px) {
+          .hero-title { font-size: clamp(1.5rem, 8vw, 2.5rem) !important; white-space: normal !important; }
+          .hero-section { padding: 7rem 1.2rem 3rem !important; }
+          .hero-text p { max-width: 100% !important; }
+          section { padding-left: 1.2rem !important; padding-right: 1.2rem !important; }
           .srv-grid    { grid-template-columns: 1fr !important; }
           .steps-grid  { grid-template-columns: 1fr !important; }
           .btn-row     { flex-direction: column; }
@@ -342,16 +346,16 @@ export default function App() {
       </div>
 
       {/* ── HERO ── */}
-      <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "9rem 2rem 4rem" }}>
+      <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "9rem 1.2rem 4rem" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", width: "100%", display: "grid", gridTemplateColumns: "1.15fr 0.85fr", gap: "4rem", alignItems: "center" }} className="hero-grid">
           <div>
             <Reveal>
-              <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", background: "rgba(107,79,58,0.08)", border: "1px solid rgba(107,79,58,0.18)", borderRadius: "4px", padding: "0.35rem 1rem", color: "var(--brown)", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "1.6rem" }}>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", background: "rgba(107,79,58,0.08)", border: "1px solid rgba(107,79,58,0.18)", borderRadius: "4px", padding: "0.35rem 1rem", color: "var(--brown)", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "1.6rem", flexWrap: "wrap" }}>
                 📸 צלמת ומנהלת רשתות חברתיות
               </div>
             </Reveal>
             <Reveal delay={0.08}>
-              <h1 className="serif" style={{ fontSize: "clamp(2.4rem, 5vw, 4.5rem)", fontWeight: 700, lineHeight: 1.1, marginBottom: "1.4rem", whiteSpace: "nowrap" }}>
+              <h1 className="serif" style={{ fontSize: "clamp(1.6rem, 6.5vw, 4.5rem)", fontWeight: 700, lineHeight: 1.15, marginBottom: "1.4rem" }}>
                 תוכן אותנטי <span style={{ color: "var(--brown)" }}>זה תוכן טהור</span>
               </h1>
             </Reveal>
@@ -713,7 +717,7 @@ export default function App() {
         <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: "60vw", height: "60vw", maxWidth: 500, maxHeight: 500, background: "radial-gradient(circle, rgba(107,79,58,0.2) 0%, transparent 65%)", zIndex: 0, borderRadius: "50%" }} />
         <div style={{ position: "relative", zIndex: 1 }}>
           <Reveal>
-            <p style={{ color: "var(--brown)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: "1.6rem" }}>מוכנים להתחיל?</p>
+            <p style={{ color: "var(--brown)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: "1.6rem", flexWrap: "wrap" }}>מוכנים להתחיל?</p>
             <h2 className="serif" style={{ fontSize: "clamp(2rem, 5vw, 3.8rem)", color: "#FAF6F0", fontWeight: 700, lineHeight: 1.15, marginBottom: "1.3rem" }}>
               בואו נבנה יחד<br /><span style={{ color: "var(--brown)" }}>את הנוכחות שמגיעה לכם</span>
             </h2>
