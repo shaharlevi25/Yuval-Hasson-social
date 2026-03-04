@@ -483,7 +483,7 @@ export default function App() {
       {/* ── PORTFOLIO — EPIC SECTION ── */}
       <section id="portfolio" style={{ background: "#1a120b", padding: "0", overflow: "hidden", position: "relative" }}>
         {/* Grain overlay */}
-        <div style={{ position: "absolute", inset: 0, zIndex: 1, backgroundImage: "url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E")", opacity: 0.4, pointerEvents: "none" }} />
+        <div style={{ position: "absolute", inset: 0, zIndex: 1, backgroundImage: "radial-gradient(rgba(250,246,240,0.03) 1px, transparent 1px)", backgroundSize: "20px 20px", pointerEvents: "none" }} />
 
         {/* Header */}
         <div style={{ position: "relative", zIndex: 2, textAlign: "center", padding: "5rem 2rem 3rem" }}>
