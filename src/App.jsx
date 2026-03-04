@@ -38,17 +38,14 @@ const PORTFOLIO = [
 
 const REVIEWS = [
   {
-    name: "לקוחה מרוצה",
     text: "אני רוצה להמליץ על יובל! לפני מקצועיות ואיכות היא קודם כל בן אדם! מקשיבה, מכילה ומבינה את הצרכים של העסק, מקצועית ויצירתית עם מחשבה מחוץ לקופסה והתאמה לקונספט ולקהל היעד. והכי חשוב מביאה תוצאות והכל מתנהל בוייב פשוט מושלם. לא תתאכזבו, מומלצת!",
     stars: 5,
   },
   {
-    name: "לקוחה יקרה",
     text: "יובלי היקרה, מעבר לזה שאת צלמת סופר מוכשרת, את גם אשת שירות ומכירות מעולה. לא בכל יום פוגשים אדם אחד שמשלב בתוכו כל כך הרבה מיומנויות, וכל זה בטבעיות ומקצועיות רבה. מאוד משקיעה בנו כלקוחות ודואגת לרדוף אחרינו, ולא אנחנו אחרייך. את מנהלת את עצמך ואותנו יופי יופי :)",
     stars: 5,
   },
   {
-    name: "לקוח מרוצה",
     text: "ממליץ מאד על יובל — מקצוענית, עניינית, תמיד זמינה, סבלנית, והכי חשוב תוצאות מהירות!!!",
     stars: 5,
   },
@@ -68,11 +65,11 @@ export default function App() {
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
-  // Auto-rotate reviews every 25s
+  // Auto-rotate reviews every 15s
   useEffect(() => {
     reviewTimer.current = setInterval(() => {
       setReviewIndex(i => (i + 1) % REVIEWS.length);
-    }, 25000);
+    }, 15000);
     return () => clearInterval(reviewTimer.current);
   }, []);
 
@@ -86,15 +83,15 @@ export default function App() {
 
   const services = [
     { icon: "🎬", title: "צילום ועריכת תוכן",  text: "צילום ועריכת סרטונים ותמונות ברמה מקצועית שמציגות אותך בצורה הכי טובה שיש." },
-    { icon: "🎵", title: "ניהול טיקטוק",        text: "טרנדים, מוזיקה, אלגוריתם — אני על זה. אתם רק צריכים להיות אתם." },
-    { icon: "🎯", title: "אסטרטגיה ומיתוג",     text: "בונים יחד זהות ברורה — צבע, שפה, קהל יעד. הכל מדויק לפי הצורך שלכם." },
+    { icon: "🎵", title: "ניהול טיקטוק",        text: "טרנדים, מוזיקה, אלגוריתם אני על זה. אתם רק צריכים להיות אתם." },
+    { icon: "🎯", title: "אסטרטגיה ומיתוג",     text: "בונים יחד זהות ברורה צבע, שפה, קהל יעד. הכל מדויק לפי הצורך שלכם." },
   ];
 
   const steps = [
-    { num: "01", title: "מתחילים לדבר",       text: "שיחת היכרות חופשית. מכירים את העסק לעומק — מקהל יעד ועד המתחרים שלך." },
-    { num: "02", title: "בונים אסטרטגיה",      text: "ביחד נפתח מחשבה אסטרטגית. כי מי יודע למכור אותנו יותר מעצמנו?" },
-    { num: "03", title: "יוצרים תוכן אמיתי",  text: "בשפה שלנו, לא AI. אותנטי, אמין ומוכר." },
-    { num: "04", title: "מציגים את המקפצה",   text: "לכל תהליך יש לפני ואחרי. נתונים, חשיפות, מיתוג — רואים את התוצאות." },
+    { num: "1", title: "מתחילים לדבר",       text: "שיחת היכרות חופשית. מכירים את העסק לעומק מקהל יעד ועד המתחרים שלך." },
+    { num: "2", title: "בונים אסטרטגיה",      text: "ביחד נפתח מחשבה אסטרטגית. כי מי יודע למכור אותנו יותר מעצמנו?" },
+    { num: "3", title: "יוצרים תוכן אמיתי",  text: "בשפה שלנו, לא AI. אותנטי, אמין ומוכר." },
+    { num: "4", title: "מציגים את המקפצה",   text: "לכל תהליך יש לפני ואחרי. נתונים, חשיפות, מיתוג — רואים את התוצאות." },
   ];
 
   const faqs = [
@@ -360,7 +357,7 @@ export default function App() {
                 <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
                   <button className="btn-wa">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.103 1.514 5.829L.055 23.454a.75.75 0 0 0 .918.918l5.629-1.459A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.712 9.712 0 0 1-4.953-1.356l-.355-.211-3.681.955.977-3.578-.232-.368A9.712 9.712 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
-                    שלחי הודעה
+                    שלח/י הודעה
                   </button>
                 </a>
                 <button className="btn-secondary" onClick={() => navTo("process")}>איך זה עובד?</button>
@@ -389,10 +386,11 @@ export default function App() {
             <div>
               <p style={{ color: "var(--brown)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1rem" }}>מי אני</p>
               <h2 className="serif" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.7rem)", fontWeight: 700, lineHeight: 1.25, marginBottom: "1.8rem" }}>
-                פעם שלטי חוצות.<br /><span style={{ color: "var(--brown)" }}>היום — הרשתות שלך.</span>
+                פעם שלטי חוצות.<br /><span style={{ color: "var(--brown)" }}>היום הרשתות שלך.</span>
               </h2>
               <p style={{ color: "var(--mid)", lineHeight: 2, marginBottom: "1.2rem" }}>
-                אני יובל חסון — צלמת ומשווקת ברשתות החברתיות. חיה את הרשתות, מעורבת בתוכן טרנדי ויודעת בדיוק מה הלקוחות שלך רוצים לפגוש ברשתות שגורם לאנשים לעצור ולצפות בתוכן שלכם.
+                אני צלמת ומשווקת ברשתות החברתיות.
+                חיה את הרשתות, מעורבת בתוכן טרנדי ויודעת בדיוק מה הלקוחות שלך רוצים לפגוש ברשתות שגורם לאנשים לעצור ולצפות בתוכן שלכם.
               </p>
               <p style={{ color: "var(--mid)", lineHeight: 2, marginBottom: "1.2rem" }}>
                 הנישה שלי להעביר את התוכן שהלקוח ירצה לשמוע מכם ושהנוכחות של המקצועיות והשירות שלכם יועבר במסר ברור ללקוח.
@@ -405,14 +403,10 @@ export default function App() {
           <Reveal delay={0.15}>
             <div style={{ background: "white", borderRadius: 8, padding: "2.5rem", borderRight: "4px solid var(--brown)", boxShadow: "0 8px 32px rgba(107,79,58,0.07)" }}>
               <p className="serif" style={{ fontSize: "1.2rem", lineHeight: 1.8, color: "var(--dark)", fontStyle: "italic", marginBottom: "1.6rem" }}>
-                "פעם הפרסום לא היה נגיש כמו היום — היום אתה צריך להנגיש את הפרסום ללקוח שלך"
+                "פעם הפרסום לא היה נגיש, היום אתה צריך להנגיש את הפרסום ללקוח שלך"
               </p>
               <div style={{ display: "flex", alignItems: "center", gap: "0.9rem" }}>
                 <div style={{ width: 40, height: 40, borderRadius: "50%", background: "var(--sand)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.1rem" }}>📸</div>
-                <div>
-                  <p style={{ fontWeight: 700, fontSize: "0.88rem" }}>יובל חסון</p>
-                  <p style={{ color: "var(--light)", fontSize: "0.75rem" }}>Social Media Manager</p>
-                </div>
               </div>
             </div>
           </Reveal>
@@ -424,7 +418,7 @@ export default function App() {
         <div style={{ maxWidth: 1000, margin: "0 auto" }}>
           <Reveal>
             <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-              <p style={{ color: "var(--brown)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1rem" }}>מה אני עושה</p>
+              {/* <p style={{ color: "var(--brown)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1rem" }}>מה אני עושה</p> */}
               <h2 className="serif" style={{ fontSize: "clamp(1.9rem, 4vw, 3rem)", fontWeight: 700, lineHeight: 1.2 }}>
                 שירותים שמייצרים<br /><span style={{ color: "var(--brown)" }}>נוכחות אמיתית</span>
               </h2>
@@ -448,7 +442,7 @@ export default function App() {
       <div style={{ background: "var(--brown)", padding: "3.5rem 2rem", textAlign: "center" }}>
         <Reveal>
           <p className="serif" style={{ fontSize: "clamp(1.05rem, 2.5vw, 1.65rem)", color: "rgba(250,246,240,0.95)", fontStyle: "italic", lineHeight: 1.8, maxWidth: 820, margin: "0 auto" }}>
-            "הקהל שלנו לא רובוט — אם הרובוט יתסרט אותנו, נפספס את האותנטיות שאנחנו רוצים להעביר. איזו שפה יותר אמינה מהשפה שלנו? אף רובוט לא יכול לדבר אותה."
+            "הקהל שלנו לא רובוט, אם יתסרטו אותנו, נפספס את האותנטיות שאנחנו רוצים להעביר. איזו שפה יותר אמינה מהשפה שלנו? אף רובוט לא יכול לדבר אותה."
           </p>
 
         </Reveal>
@@ -566,7 +560,7 @@ export default function App() {
             <div style={{ textAlign: "center", marginBottom: "4.5rem" }}>
               <p style={{ color: "var(--brown)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1rem" }}>איך עובדים יחד</p>
               <h2 className="serif" style={{ fontSize: "clamp(1.9rem, 4vw, 3rem)", fontWeight: 700, lineHeight: 1.2 }}>
-                תהליך הסושיאל —<br /><span style={{ color: "var(--brown)" }}>תהליך ממכר</span>
+                תהליך הסושיאל<br /><span style={{ color: "var(--brown)" }}>תהליך ממכר</span>
               </h2>
             </div>
           </Reveal>
@@ -592,7 +586,7 @@ export default function App() {
             <div style={{ textAlign: "center", marginBottom: "1rem" }}>
               <p style={{ color: "var(--brown)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1rem" }}>התוצאה</p>
               <h2 className="serif" style={{ fontSize: "clamp(1.9rem, 4vw, 3rem)", fontWeight: 700, lineHeight: 1.2 }}>
-                לפני ואחרי —<br /><span style={{ color: "var(--brown)" }}>תראו את המקפצה</span>
+                לפני ואחרי<br /><span style={{ color: "var(--brown)" }}>תראו את המקפצה</span>
               </h2>
               <p style={{ color: "var(--mid)", marginTop: "1rem", lineHeight: 1.85, fontSize: "0.97rem", maxWidth: 600, margin: "1rem auto 0" }}>
                 כבר ברגע שנתחיל, הנה כמה עובדות שמראש ניתן להבין שיקרו
@@ -789,7 +783,7 @@ export default function App() {
       {/* ── FOOTER ── */}
       <footer style={{ background: "#1a120b", padding: "1.5rem 2rem" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.5rem" }}>
-          <span style={{ color: "rgba(250,246,240,0.25)", fontSize: "0.77rem" }}>© 2024 יובל חסון | ניהול רשתות חברתיות</span>
+          <span style={{ color: "rgb(135, 125, 102)", fontSize: "0.77rem" }}>© 2026 יובל חסון ניהול סושיאל | נבנה על ידי שחר לוי</span>
           <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ color: "rgba(37,211,102,0.6)", textDecoration: "none", fontSize: "0.77rem", display: "flex", alignItems: "center", gap: "0.4rem" }}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.103 1.514 5.829L.055 23.454a.75.75 0 0 0 .918.918l5.629-1.459A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.712 9.712 0 0 1-4.953-1.356l-.355-.211-3.681.955.977-3.578-.232-.368A9.712 9.712 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
             וואטסאפ
