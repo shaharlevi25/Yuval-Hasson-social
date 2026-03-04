@@ -277,6 +277,9 @@ export default function App() {
         .hamburger   { display: none; }
 
         @media (max-width: 900px) {
+          .carousel-desktop { display: none !important; }
+          .carousel-mobile  { display: block !important; }
+          .carousel-btn { width: 38px !important; height: 38px !important; font-size: 1.1rem !important; }
           .desktop-nav { display: none !important; }
           .hamburger   { display: flex !important; }
           .hero-grid   { grid-template-columns: 1fr !important; }
@@ -298,11 +301,11 @@ export default function App() {
           section { padding-left: 1.2rem !important; padding-right: 1.2rem !important; }
           .srv-grid    { grid-template-columns: 1fr !important; }
           .steps-grid  { grid-template-columns: 1fr !important; }
-          .btn-row { flex-direction: row !important; flex-wrap: nowrap; gap: 0.7rem; }
+          .btn-row { flex-direction: row !important; flex-wrap: nowrap !important; gap: 0.6rem !important; }
           .btn-row a { flex: 1; min-width: 0; }
-          .btn-row .btn-wa { width: 100%; font-size: 0.82rem !important; padding: 0.85rem 0.5rem !important; }
-          .btn-row .btn-secondary { width: 100%; font-size: 0.82rem !important; padding: 0.85rem 0.5rem !important; }
-          .btn-row .btn-wa svg { display: none; }
+          .btn-row .btn-wa { width: 100% !important; font-size: 0.8rem !important; padding: 0.8rem 0.4rem !important; justify-content: center; }
+          .btn-row .btn-secondary { width: 100% !important; font-size: 0.8rem !important; padding: 0.8rem 0.4rem !important; }
+          .btn-row .btn-wa svg { display: none !important; }
         }
       `}</style>
 
@@ -478,10 +481,12 @@ export default function App() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div style={{ display: "flex", alignItems: "center", gap: "1.2rem" }}>
+            {/* Desktop: 3 items | Mobile: 1 item full width */}
+            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
               <button className="carousel-btn" onClick={prevSlide}>›</button>
               <div style={{ flex: 1, overflow: "hidden" }}>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1.2rem" }} className="carousel-inner">
+                {/* Desktop grid */}
+                <div className="carousel-desktop" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1.2rem" }}>
                   {visibleItems.map((item, i) => (
                     <div key={i} className="p-card">
                       {item.type === "video" ? (
@@ -490,13 +495,12 @@ export default function App() {
                           onMouseLeave={e => { e.target.pause(); e.target.currentTime = 0; }}
                           onError={e => {
                             e.target.style.display = "none";
-                            e.target.parentElement.innerHTML = `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;padding:1.5rem;text-align:center"><span style="font-size:2.5rem;opacity:0.2">🎬</span><p style="color:var(--light);font-size:0.75rem;line-height:1.6">${item.client}<br/><span style="font-size:0.66rem;opacity:0.6">הכניסי סרטון ל-<br/>public/portfolio/</span></p></div>`;
+                            e.target.parentElement.innerHTML = `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;padding:1.5rem;text-align:center"><span style="font-size:2.5rem;opacity:0.2">🎬</span><p style="color:var(--light);font-size:0.75rem;line-height:1.6">${item.client}</p></div>`;
                           }} />
                       ) : (
                         <img src={item.src} alt={item.client}
                           onError={e => {
                             e.target.style.display = "none";
-                            e.target.parentElement.innerHTML = `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;padding:1.5rem;text-align:center"><span style="font-size:2.5rem;opacity:0.2">📸</span><p style="color:var(--light);font-size:0.75rem;line-height:1.6">${item.client}<br/><span style="font-size:0.66rem;opacity:0.6">הכניסי תמונה ל-<br/>public/portfolio/</span></p></div>`;
                           }} />
                       )}
                       <div className="p-overlay">
@@ -505,6 +509,27 @@ export default function App() {
                       </div>
                     </div>
                   ))}
+                </div>
+                {/* Mobile: single item full width */}
+                <div className="carousel-mobile" style={{ display: "none" }}>
+                  <div className="p-card" style={{ maxWidth: 320, margin: "0 auto", aspectRatio: "9/16" }}>
+                    {PORTFOLIO[slideIndex].type === "video" ? (
+                      <video
+                        key={slideIndex}
+                        src={PORTFOLIO[slideIndex].src}
+                        controls
+                        playsInline
+                        style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 12 }}
+                        onError={e => {
+                          e.target.style.display = "none";
+                          e.target.parentElement.innerHTML = `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;padding:1.5rem;text-align:center"><span style="font-size:3rem;opacity:0.2">🎬</span><p style="color:var(--light);font-size:0.85rem">${PORTFOLIO[slideIndex].client}</p></div>`;
+                        }}
+                      />
+                    ) : (
+                      <img src={PORTFOLIO[slideIndex].src} alt={PORTFOLIO[slideIndex].client}
+                        style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 12 }} />
+                    )}
+                  </div>
                 </div>
               </div>
               <button className="carousel-btn" onClick={nextSlide}>‹</button>
