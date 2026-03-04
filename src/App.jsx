@@ -352,7 +352,7 @@ export default function App() {
       </div>
 
       {/* ── HERO ── */}
-      <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "9rem 1.2rem 4rem", position: "relative", overflow: "hidden" }}>
+      <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "12rem 1.2rem 5rem", position: "relative", overflow: "hidden", justifyContent: "flex-end" }}>
         {/* Background image — mobile only, 25% opacity */}
         <div className="hero-bg-mobile" style={{
           position: "absolute", inset: 0, zIndex: 0,
@@ -476,25 +476,20 @@ export default function App() {
           <p className="serif" style={{ fontSize: "clamp(1.05rem, 2.5vw, 1.65rem)", color: "rgba(250,246,240,0.95)", fontStyle: "italic", lineHeight: 1.8, maxWidth: 820, margin: "0 auto" }}>
             "הקהל שלנו לא רובוט — אם הרובוט יתסרט אותנו, נפספס את האותנטיות שאנחנו רוצים להעביר. איזו שפה יותר אמינה מהשפה שלנו? אף רובוט לא יכול לדבר אותה."
           </p>
-          <p style={{ color: "rgba(250,246,240,0.45)", marginTop: "1rem", fontSize: "0.8rem", letterSpacing: "0.08em" }}>— יובל חסון</p>
+
         </Reveal>
       </div>
 
       {/* ── PORTFOLIO — EPIC SECTION ── */}
-      <section id="portfolio" style={{ background: "#1a120b", padding: "0", overflow: "hidden", position: "relative" }}>
+      <section id="portfolio" style={{ background: "#6B5240", padding: "0", overflow: "hidden", position: "relative" }}>
         {/* Grain overlay */}
         <div style={{ position: "absolute", inset: 0, zIndex: 1, backgroundImage: "radial-gradient(rgba(250,246,240,0.03) 1px, transparent 1px)", backgroundSize: "20px 20px", pointerEvents: "none" }} />
 
         {/* Header */}
-        <div style={{ position: "relative", zIndex: 2, textAlign: "center", padding: "5rem 2rem 3rem" }}>
+        <div style={{ position: "relative", zIndex: 2, textAlign: "center", padding: "4rem 2rem 2.5rem" }}>
           <Reveal>
-            <p style={{ color: "var(--brown)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "1rem" }}>עבודות</p>
-            <h2 className="serif" style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)", fontWeight: 700, lineHeight: 1.1, color: "#FAF6F0" }}>
-              העבודות שלנו<br />
-              <span style={{ color: "var(--brown)", fontStyle: "italic" }}>מדברות בעד עצמן</span>
-            </h2>
-            <p style={{ color: "rgba(250,246,240,0.45)", marginTop: "1rem", fontSize: "0.97rem", lineHeight: 1.7 }}>
-              תוכן אמיתי • תוצאות אמיתיות • לקוחות מרוצים
+            <p style={{ color: "rgba(250,246,240,0.5)", fontSize: "1rem", lineHeight: 1.7, letterSpacing: "0.06em" }}>
+              תוכן אמיתי &bull; תוצאות אמיתיות &bull; לקוחות מרוצים
             </p>
           </Reveal>
         </div>
@@ -582,16 +577,7 @@ export default function App() {
           ))}
         </div>
 
-        {/* CTA strip */}
-        <div style={{ position: "relative", zIndex: 2, textAlign: "center", padding: "2rem 2rem 5rem", borderTop: "1px solid rgba(250,246,240,0.07)" }}>
-          <p style={{ color: "rgba(250,246,240,0.45)", fontSize: "0.9rem", marginBottom: "1.4rem" }}>מוכן לראות את העסק שלך ככה? 👇</p>
-          <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
-            <button className="btn-wa" style={{ fontSize: "1rem", padding: "1rem 2.8rem" }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.103 1.514 5.829L.055 23.454a.75.75 0 0 0 .918.918l5.629-1.459A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.712 9.712 0 0 1-4.953-1.356l-.355-.211-3.681.955.977-3.578-.232-.368A9.712 9.712 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
-              בואו נדבר
-            </button>
-          </a>
-        </div>
+
       </section>
 
       {/* ── PROCESS ── */}
@@ -609,7 +595,7 @@ export default function App() {
             {steps.map((step, i) => (
               <Reveal key={i} delay={i * 0.1}>
                 <div style={{ padding: "0 1rem", textAlign: "center", position: "relative" }}>
-                  {i > 0 && <div style={{ position: "absolute", top: 22, right: "50%", width: "100%", height: 1, background: "rgba(107,79,58,0.18)" }} />}
+                  {i < steps.length - 1 && <div style={{ position: "absolute", top: 22, left: "-50%", width: "100%", height: 1, background: "rgba(107,79,58,0.18)", zIndex: 0 }} />}
                   <div style={{ width: 44, height: 44, borderRadius: "50%", background: "var(--brown)", color: "#FAF6F0", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: "0.82rem", margin: "0 auto 1.4rem", position: "relative", zIndex: 1, boxShadow: "0 4px 14px rgba(107,79,58,0.3)" }}>{step.num}</div>
                   <h3 style={{ fontWeight: 700, marginBottom: "0.6rem", fontSize: "0.97rem" }}>{step.title}</h3>
                   <p style={{ color: "var(--mid)", fontSize: "0.85rem", lineHeight: 1.75 }}>{step.text}</p>
@@ -705,6 +691,7 @@ export default function App() {
         </div>
       </section>
 
+{/* PACKAGES — מוסתר, להסרת ההערות כדי להפעיל
       {/* ── PACKAGES ── */}
       <section id="packages" style={{ background: "var(--sand)", padding: "6rem 2rem" }}>
         <div style={{ maxWidth: 1000, margin: "0 auto" }}>
@@ -750,7 +737,8 @@ export default function App() {
         </div>
       </section>
 
-      {/* ── FAQ ── */}
+*/}
+            {/* ── FAQ ── */}
       <section id="faq" style={{ padding: "6rem 2rem" }}>
         <div style={{ maxWidth: 720, margin: "0 auto" }}>
           <Reveal>
@@ -781,12 +769,12 @@ export default function App() {
         <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: "60vw", height: "60vw", maxWidth: 500, maxHeight: 500, background: "radial-gradient(circle, rgba(107,79,58,0.2) 0%, transparent 65%)", zIndex: 0, borderRadius: "50%" }} />
         <div style={{ position: "relative", zIndex: 1 }}>
           <Reveal>
-            <p style={{ color: "var(--brown)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: "1.6rem", flexWrap: "wrap" }}>מוכנים להתחיל?</p>
+            <p style={{ color: "var(--brown)", fontSize: "clamp(1.4rem, 3vw, 2rem)", fontWeight: 700, letterSpacing: "0.05em", marginBottom: "1rem" }}>מוכנים להתחיל להגדיל?</p>
             <h2 className="serif" style={{ fontSize: "clamp(2rem, 5vw, 3.8rem)", color: "#FAF6F0", fontWeight: 700, lineHeight: 1.15, marginBottom: "1.3rem" }}>
-              בואו נבנה יחד<br /><span style={{ color: "var(--brown)" }}>את הנוכחות שמגיעה לכם</span>
+              בואו נבנה יחד<br /><span style={{ color: "var(--brown)" }}>את התוכן המתאים לעסק שלכם</span>
             </h2>
             <p style={{ color: "rgba(250,246,240,0.5)", fontSize: "1rem", marginBottom: "2.8rem", lineHeight: 1.8 }}>
-              שלחי הודעה ונתחיל לבנות את הסיפור האמיתי שלך ברשתות
+              
             </p>
             <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
               <button className="btn-wa" style={{ fontSize: "1.05rem", padding: "1.15rem 3.2rem" }}>
