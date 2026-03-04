@@ -462,7 +462,12 @@ export default function App() {
         {/* Header */}
         <div style={{ position: "relative", zIndex: 2, textAlign: "center", padding: "4rem 2rem 2.5rem" }}>
           <Reveal>
-            <p style={{ color: "rgba(250,246,240,0.5)", fontSize: "1rem", lineHeight: 1.7, letterSpacing: "0.06em" }}>
+            <p style={{ color: "rgba(250,246,240,0.6)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "1rem" }}>עבודות</p>
+            <h2 className="serif" style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)", fontWeight: 700, lineHeight: 1.1, color: "#FAF6F0" }}>
+              העבודות שלנו<br />
+              <span style={{ color: "rgba(250,246,240,0.75)", fontStyle: "italic" }}>מדברות בעד עצמן</span>
+            </h2>
+            <p style={{ color: "rgba(250,246,240,0.45)", marginTop: "1rem", fontSize: "0.97rem", lineHeight: 1.7 }}>
               תוכן אמיתי &bull; תוצאות אמיתיות &bull; לקוחות מרוצים
             </p>
           </Reveal>
