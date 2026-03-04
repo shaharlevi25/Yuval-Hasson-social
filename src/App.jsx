@@ -559,7 +559,7 @@ export default function App() {
             <div style={{ textAlign: "center", marginBottom: "4.5rem" }}>
               <p style={{ color: "var(--brown)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1rem" }}>איך עובדים יחד</p>
               <h2 className="serif" style={{ fontSize: "clamp(1.9rem, 4vw, 3rem)", fontWeight: 700, lineHeight: 1.2 }}>
-                תהליך הסושיאל —<br /><span style={{ color: "var(--brown)" }}>תהליך ממכר</span>
+                תהליך הסושיאל<br /><span style={{ color: "var(--brown)" }}>תהליך ממכר</span>
               </h2>
             </div>
           </Reveal>
