@@ -82,17 +82,17 @@ export default function App() {
   const nextSlide = () => setSlideIndex(i => (i + 1) % PORTFOLIO.length);
 
   const services = [
-    { icon: "🎬", title: "צילום ועריכת תוכן",  text: "צילום ועריכת סרטונים ותמונות ברמה מקצועית שמציגות אותך בצורה הכי טובה שיש." },
-    { icon: "🎵", title: "ניהול טיקטוק",        text: "טרנדים, מוזיקה, אלגוריתם אני על זה. אתם רק צריכים להיות אתם." },
-    { icon: "🎯", title: "אסטרטגיה ומיתוג",     text: "בונים יחד זהות ברורה צבע, שפה, קהל יעד. הכל מדויק לפי הצורך שלכם." },
+    { icon: "🎬", title: "צילום ועריכת תוכן",  text: "צילום ועריכת סרטונים ותמונות ברמה מקצועית.\nשמציגות אותך בצורה הכי טובה שיש." },
+    { icon: "🎵", title: "ניהול טיקטוק",        text: "טרנדים, מוזיקה, אלגוריתם — אני על זה.\nאתם רק צריכים להיות אתם." },
+    { icon: "🎯", title: "אסטרטגיה ומיתוג",     text: "בונים יחד זהות ברורה — צבע, שפה, קהל יעד.\nהכל מדויק לפי הצורך שלכם." },
   ];
 
   const steps = [
-    { num: "1", title: "מתחילים לדבר",       text: "שיחת היכרות חופשית. מכירים את העסק לעומק מקהל יעד ועד המתחרים שלך." },
-    { num: "2", title: "בונים אסטרטגיה",      text: "ביחד נפתח מחשבה אסטרטגית. כי מי יודע למכור אותנו יותר מעצמנו?" },
-    { num: "3", title: "יוצרים תוכן אמיתי",  text: "בשפה שלנו, לא AI. אותנטי, אמין ומוכר." },
-    { num: "4", title: "מציגים את המקפצה",   text: "לכל תהליך יש לפני ואחרי. נתונים, חשיפות, מיתוג — רואים את התוצאות." },
-  ];
+    { num: "1", title: "מתחילים לדבר",       text: "שיחת היכרות חופשית.\nמכירים את העסק לעומק — מקהל יעד ועד המתחרים שלך." },
+    { num: "2", title: "בונים אסטרטגיה",      text: "ביחד נפתח מחשבה אסטרטגית.\nכי מי יודע למכור אותנו יותר מעצמנו?" },
+    { num: "3", title: "יוצרים תוכן אמיתי",  text: "בשפה שלנו, לא AI.\nאותנטי, אמין ומוכר." },
+    { num: "4", title: "מציגים את המקפצה",   text: "לכל תהליך יש לפני ואחרי.\nנתונים, חשיפות, מיתוג — רואים את התוצאות." },
+  ];;
 
   const faqs = [
     { q: "למה לא לכתוב תסריטים עם AI?",   a: "כי הקהל שלך לא רובוט. אם תישמעי כמו רובוט תפספסי את האותנטיות שהם מחפשים. השפה שלך תמיד תנצח." },
@@ -287,7 +287,7 @@ export default function App() {
 
       {/* ── NAVBAR ── */}
       <nav style={{ position: "fixed", top: 0, right: 0, left: 0, zIndex: 200, padding: "1rem 2rem", display: "flex", justifyContent: "space-between", alignItems: "center", background: scrolled ? "rgba(250,246,240,0.95)" : "transparent", backdropFilter: scrolled ? "blur(16px)" : "none", borderBottom: scrolled ? "1px solid rgba(107,79,58,0.1)" : "none", transition: "all 0.4s" }}>
-        <img src="/logo.svg" alt="יובל חסון" style={{ height: 130 }} onError={e => e.target.style.display = "none"} />
+        <img src="/logo.svg" alt="יובל חסון" style={{ height: 62 }} onError={e => e.target.style.display = "none"} />
         <div className="desktop-nav" style={{ gap: "1.8rem", alignItems: "center" }}>
           {NAV.map(n => (
             <button key={n.id} onClick={() => navTo(n.id)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--mid)", fontSize: "0.86rem", fontWeight: 500, fontFamily: "inherit", transition: "color 0.25s" }}
@@ -317,13 +317,13 @@ export default function App() {
         <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ textDecoration: "none", marginTop: "1.5rem" }}>
           <button className="btn-wa" style={{ width: "100%" }}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.103 1.514 5.829L.055 23.454a.75.75 0 0 0 .918.918l5.629-1.459A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.712 9.712 0 0 1-4.953-1.356l-.355-.211-3.681.955.977-3.578-.232-.368A9.712 9.712 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
-            שלחי הודעה בוואטסאפ
+           שלח/י הודעה בווצאפ
           </button>
         </a>
       </div>
 
       {/* ── HERO ── */}
-      <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "13rem 1.2rem 3rem", position: "relative", overflow: "hidden" }}>
+      <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "14rem 1.2rem 2rem", position: "relative", overflow: "hidden", alignItems: "flex-end" }}>
         {/* Background image — mobile only, 25% opacity */}
         <div className="hero-bg-mobile" style={{
           position: "absolute", inset: 0, zIndex: 0,
@@ -345,10 +345,10 @@ export default function App() {
               </h1>
             </Reveal>
             <Reveal delay={0.14}>
-              <p style={{ fontSize: "1.05rem", lineHeight: 1.95, color: "var(--mid)", maxWidth: 520, marginBottom: "0.8rem" }}>
+              <p style={{ fontSize: "1.05rem", lineHeight: 1.95, color:"#1a1008", maxWidth: 520, marginBottom: "0.8rem" }}>
                 אני יובל חסון — חיה את הרשתות החברתיות ומעורבת בתוכן הטרנדי של היום.
               </p>
-              <p style={{ fontSize: "1.05rem", lineHeight: 1.95, color: "var(--mid)", maxWidth: 520, marginBottom: "2.5rem" }}>
+              <p style={{ fontSize: "1.05rem", lineHeight: 1.95, color:"#1a1008", maxWidth: 520, marginBottom: "2.5rem" }}>
                 הנישה שלי: לגרום לך להישמע בדיוק כמוך — אמיתי, אמין ומוכר.
               </p>
             </Reveal>
@@ -406,7 +406,6 @@ export default function App() {
                 "פעם הפרסום לא היה נגיש, היום אתה צריך להנגיש את הפרסום ללקוח שלך"
               </p>
               <div style={{ display: "flex", alignItems: "center", gap: "0.9rem" }}>
-                <div style={{ width: 40, height: 40, borderRadius: "50%", background: "var(--sand)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.1rem" }}>📸</div>
               </div>
             </div>
           </Reveal>
@@ -695,9 +694,9 @@ export default function App() {
         <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: "60vw", height: "60vw", maxWidth: 500, maxHeight: 500, background: "radial-gradient(circle, rgba(107,79,58,0.2) 0%, transparent 65%)", zIndex: 0, borderRadius: "50%" }} />
         <div style={{ position: "relative", zIndex: 1 }}>
           <Reveal>
-            <p style={{ color: "var(--brown)", fontSize: "clamp(1.3rem, 2.5vw, 1.8rem)", fontWeight: 700, letterSpacing: "0.05em", marginBottom: "1rem" }}>מוכנים להתחיל להגדיל?</p>
+            <p style={{ color: "#C8A882", fontSize: "clamp(1.3rem, 2.5vw, 1.8rem)", fontWeight: 700, letterSpacing: "0.05em", marginBottom: "1rem" }}>מוכנים להתחיל להגדיל?</p>
             <h2 className="serif" style={{ fontSize: "clamp(2rem, 5vw, 3.8rem)", color: "#FAF6F0", fontWeight: 700, lineHeight: 1.15, marginBottom: "1.3rem" }}>
-              בואו נבנה יחד<br /><span style={{ color: "var(--brown)" }}>את התוכן המתאים לעסק שלכם</span>
+              בואו נבנה יחד<br /><span style={{ color: "#C8A882" }}>את התוכן המתאים לעסק שלכם</span>
             </h2>
             <p style={{ color: "rgba(250,246,240,0.45)", fontSize: "1rem", marginBottom: "2.8rem", lineHeight: 1.85, maxWidth: 520, margin: "1.2rem auto 2.8rem" }}>
               נצרף תוכן מקצועי, עקבי ואותנטי — שמדבר בדיוק בשפה של הקהל שלך ומביא לקוחות.
@@ -705,7 +704,7 @@ export default function App() {
             <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
               <button className="btn-wa" style={{ fontSize: "1.05rem", padding: "1.15rem 3.2rem" }}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.103 1.514 5.829L.055 23.454a.75.75 0 0 0 .918.918l5.629-1.459A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.712 9.712 0 0 1-4.953-1.356l-.355-.211-3.681.955.977-3.578-.232-.368A9.712 9.712 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
-                שלחי הודעה בוואטסאפ
+               שלח/י הודעה בווצאפ
               </button>
             </a>
           </Reveal>
