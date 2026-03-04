@@ -280,6 +280,8 @@ export default function App() {
           .carousel-desktop { display: none !important; }
           .carousel-mobile  { display: block !important; }
           .carousel-btn { width: 38px !important; height: 38px !important; font-size: 1.1rem !important; }
+          .hero-bg-mobile { display: block !important; }
+          .hero-photo { display: none !important; }
           .desktop-nav { display: none !important; }
           .hamburger   { display: flex !important; }
           .hero-grid   { grid-template-columns: 1fr !important; }
@@ -301,11 +303,12 @@ export default function App() {
           section { padding-left: 1.2rem !important; padding-right: 1.2rem !important; }
           .srv-grid    { grid-template-columns: 1fr !important; }
           .steps-grid  { grid-template-columns: 1fr !important; }
-          .btn-row { flex-direction: row !important; flex-wrap: nowrap !important; gap: 0.6rem !important; }
-          .btn-row a { flex: 1; min-width: 0; }
-          .btn-row .btn-wa { width: 100% !important; font-size: 0.8rem !important; padding: 0.8rem 0.4rem !important; justify-content: center; }
-          .btn-row .btn-secondary { width: 100% !important; font-size: 0.8rem !important; padding: 0.8rem 0.4rem !important; }
+          .btn-row { flex-direction: row !important; flex-wrap: nowrap !important; gap: 0.5rem !important; width: 100% !important; }
+          .btn-row a { flex: 1; min-width: 0; display: block; }
+          .btn-row .btn-wa { width: 100% !important; font-size: 0.75rem !important; padding: 0.7rem 0.3rem !important; justify-content: center; gap: 0.25rem !important; border-radius: 4px; }
+          .btn-row .btn-secondary { width: 100% !important; font-size: 0.75rem !important; padding: 0.7rem 0.3rem !important; border-radius: 4px; }
           .btn-row .btn-wa svg { display: none !important; }
+          .btn-row .btn-secondary { flex: 1; }
         }
       `}</style>
 
@@ -347,8 +350,16 @@ export default function App() {
       </div>
 
       {/* ── HERO ── */}
-      <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "9rem 1.2rem 4rem" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", width: "100%", display: "grid", gridTemplateColumns: "1.15fr 0.85fr", gap: "4rem", alignItems: "center" }} className="hero-grid">
+      <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "9rem 1.2rem 4rem", position: "relative", overflow: "hidden" }}>
+        {/* Background image — mobile only, 25% opacity */}
+        <div className="hero-bg-mobile" style={{
+          position: "absolute", inset: 0, zIndex: 0,
+          backgroundImage: "url('/yuval-photo.jpeg')",
+          backgroundSize: "cover", backgroundPosition: "top center",
+          opacity: 0.22,
+          display: "none",
+        }} />
+        <div style={{ maxWidth: 1200, margin: "0 auto", width: "100%", display: "grid", gridTemplateColumns: "1.15fr 0.85fr", gap: "4rem", alignItems: "center", position: "relative", zIndex: 1 }} className="hero-grid">
           <div>
             <Reveal>
               <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", background: "rgba(107,79,58,0.08)", border: "1px solid rgba(107,79,58,0.18)", borderRadius: "4px", padding: "0.35rem 1rem", color: "var(--brown)", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "1.6rem", flexWrap: "wrap" }}>
@@ -596,7 +607,10 @@ export default function App() {
           <Reveal delay={0.1}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 50px 1fr", alignItems: "stretch", marginTop: "3rem" }} className="ba-grid">
               <div className="ba-before" style={{ background: "var(--linen)", border: "1px solid rgba(107,79,58,0.12)", borderRadius: "8px 0 0 8px", padding: "2.2rem" }}>
-                <p style={{ fontSize: "0.7rem", color: "var(--light)", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1.2rem" }}>לפני</p>
+                <div style={{ marginBottom: "1.4rem" }}>
+                  <p style={{ fontSize: "1.4rem", fontWeight: 900, color: "var(--brown)" }}>לפני</p>
+                  <p style={{ fontSize: "0.8rem", color: "var(--light)", marginTop: "0.2rem" }}>(לפני שהתחלתם לעבוד איתי)</p>
+                </div>
                 {["תוכן חובבני ולא עקבי","שפה שיווקית לא רציפה","חשיפה נמוכה","ללא אסטרטגיה"].map((t,i)=>(
                   <div key={i} style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "0.75rem" }}>
                     <span style={{ color: "#C4AFA5", fontSize: "0.8rem" }}>✕</span>
@@ -606,7 +620,10 @@ export default function App() {
               </div>
               <div className="ba-arrow" style={{ display: "flex", justifyContent: "center", alignItems: "center", background: "var(--brown)", color: "#FAF6F0", fontSize: "1.2rem" }}>←</div>
               <div className="ba-after" style={{ background: "var(--brown)", borderRadius: "0 8px 8px 0", padding: "2.2rem" }}>
-                <p style={{ fontSize: "0.7rem", color: "rgba(250,246,240,0.5)", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1.2rem" }}>אחרי</p>
+                <div style={{ marginBottom: "1.4rem" }}>
+                  <p style={{ fontSize: "1.4rem", fontWeight: 900, color: "#FAF6F0" }}>אחרי</p>
+                  <p style={{ fontSize: "0.8rem", color: "rgba(250,246,240,0.55)", marginTop: "0.2rem" }}>(אחרי שהתחלתם לעבוד איתי)</p>
+                </div>
                 {["תוכן עקבי עם מיתוג אחיד","צבע מותג בכל סרטון","חשיפות גבוהות ומעורבות קהל יעד","תוכן מקצועי ולא חובבני"].map((t,i)=>(
                   <div key={i} style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "0.75rem" }}>
                     <span style={{ color: "rgba(250,246,240,0.7)" }}>✓</span>
@@ -756,6 +773,74 @@ export default function App() {
           </Reveal>
         </div>
       </section>
+
+      {/* ── ACCESSIBILITY WIDGET ── */}
+      <div id="accessibility-widget" role="complementary" aria-label="כלי נגישות">
+        <style>{`
+          #acc-btn {
+            position: fixed; bottom: 24px; left: 24px; z-index: 9999;
+            width: 52px; height: 52px; border-radius: 50%;
+            background: var(--brown); color: white; border: none;
+            font-size: 1.4rem; cursor: pointer;
+            box-shadow: 0 4px 20px rgba(107,79,58,0.4);
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+          }
+          #acc-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(107,79,58,0.5); }
+          #acc-btn:focus { outline: 3px solid #FAD27A; outline-offset: 3px; }
+          #acc-menu {
+            position: fixed; bottom: 88px; left: 24px; z-index: 9998;
+            background: white; border-radius: 12px; padding: 1rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            display: none; flex-direction: column; gap: 0.5rem;
+            min-width: 200px; border: 1px solid rgba(107,79,58,0.1);
+          }
+          #acc-menu.open { display: flex; }
+          .acc-opt {
+            background: none; border: 1px solid rgba(107,79,58,0.15);
+            border-radius: 6px; padding: 0.6rem 1rem;
+            font-family: inherit; font-size: 0.88rem; cursor: pointer;
+            text-align: right; color: var(--dark); transition: background 0.2s;
+            display: flex; align-items: center; gap: 0.5rem;
+          }
+          .acc-opt:hover { background: var(--linen); }
+          .acc-opt:focus { outline: 2px solid var(--brown); }
+          body.acc-large-text { font-size: 120% !important; }
+          body.acc-high-contrast { filter: contrast(1.5) !important; }
+          body.acc-underline-links a { text-decoration: underline !important; }
+        `}</style>
+        <button id="acc-btn" aria-label="פתח תפריט נגישות" aria-expanded="false"
+          onClick={() => {
+            const menu = document.getElementById("acc-menu");
+            const btn = document.getElementById("acc-btn");
+            const isOpen = menu.classList.toggle("open");
+            btn.setAttribute("aria-expanded", isOpen);
+          }}>
+          ♿
+        </button>
+        <div id="acc-menu" role="menu" aria-label="אפשרויות נגישות" dir="rtl">
+          <p style={{ fontSize: "0.7rem", color: "var(--light)", fontWeight: 600, letterSpacing: "0.08em", marginBottom: "0.3rem", paddingRight: "0.3rem" }}>נגישות</p>
+          {[
+            { label: "הגדלת טקסט", icon: "A+", cls: "acc-large-text" },
+            { label: "ניגודיות גבוהה", icon: "◑", cls: "acc-high-contrast" },
+            { label: "קישורים מודגשים", icon: "🔗", cls: "acc-underline-links" },
+          ].map(opt => (
+            <button key={opt.cls} className="acc-opt" role="menuitem"
+              onClick={() => document.body.classList.toggle(opt.cls)}>
+              <span style={{ fontWeight: 700, minWidth: 20 }}>{opt.icon}</span>
+              {opt.label}
+            </button>
+          ))}
+          <button className="acc-opt" role="menuitem"
+            onClick={() => { document.body.classList.remove("acc-large-text","acc-high-contrast","acc-underline-links"); }}>
+            <span style={{ fontWeight: 700, minWidth: 20 }}>↺</span>
+            איפוס
+          </button>
+          <p style={{ fontSize: "0.68rem", color: "var(--light)", marginTop: "0.5rem", paddingRight: "0.3rem", lineHeight: 1.5 }}>
+            נגישות לפי תקן WCAG 2.1<br />ותקנות שוויון זכויות לאנשים עם מוגבלות
+          </p>
+        </div>
+      </div>
 
       {/* ── FOOTER ── */}
       <footer style={{ background: "#1a120b", padding: "1.5rem 2rem" }}>
