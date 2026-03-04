@@ -1,34 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
+    <div style={{ direction: 'rtl', textAlign: 'center', fontFamily: 'sans-serif', padding: '40px' }}>
+      <header style={{ backgroundColor: '#1DA1F2', color: 'white', padding: '50px', borderRadius: '20px' }}>
+        <h1>יובל חסון - ניהול סושיאל מקצועי</h1>
+        <p>בונים לעסק שלך נוכחות דיגיטלית שמביאה לקוחות</p>
+      </header>
+      
+      <main style={{ marginTop: '30px' }}>
+        <h2>השירותים שלנו</h2>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
+          <div style={{ border: '1px solid #ddd', padding: '20px', borderRadius: '10px', width: '200px' }}>
+            <h3>ניהול תוכן</h3>
+            <p>פוסטים, סטוריז ורילס בטיקטוק ובאינסטגרם</p>
+          </div>
+          <div style={{ border: '1px solid #ddd', padding: '20px', borderRadius: '10px', width: '200px' }}>
+            <h3>אסטרטגיה</h3>
+            <p>בניית תוכנית עבודה חודשית מנצחת</p>
+          </div>
+        </div>
+      </main>
+
+      <footer style={{ marginTop: '50px' }}>
+        <a href="https://wa.me/972500000000" style={{ backgroundColor: '#25D366', color: 'white', padding: '15px 25px', borderRadius: '50px', textDecoration: 'none', fontWeight: 'bold' }}>
+          דברו איתי בוואטסאפ
         </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      </footer>
+    </div>
   )
 }
 
