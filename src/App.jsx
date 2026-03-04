@@ -302,9 +302,11 @@ export default function App() {
           section { padding-left: 1.2rem !important; padding-right: 1.2rem !important; }
           .srv-grid    { grid-template-columns: 1fr !important; }
           .steps-grid  { grid-template-columns: 1fr !important; }
-          .btn-row     { flex-direction: column; }
-          .btn-row .btn-primary, .btn-row .btn-secondary, .btn-row a { width: 100%; }
-          .btn-row .btn-primary, .btn-row .btn-secondary { width: 100%; }
+          .btn-row { flex-direction: row !important; flex-wrap: nowrap; gap: 0.7rem; }
+          .btn-row a { flex: 1; min-width: 0; }
+          .btn-row .btn-wa { width: 100%; font-size: 0.82rem !important; padding: 0.85rem 0.5rem !important; }
+          .btn-row .btn-secondary { width: 100%; font-size: 0.82rem !important; padding: 0.85rem 0.5rem !important; }
+          .btn-row .btn-wa svg { display: none; }
         }
       `}</style>
 
