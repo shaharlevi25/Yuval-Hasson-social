@@ -287,7 +287,7 @@ export default function App() {
 
       {/* ── NAVBAR ── */}
       <nav style={{ position: "fixed", top: 0, right: 0, left: 0, zIndex: 200, padding: "1rem 2rem", display: "flex", justifyContent: "space-between", alignItems: "center", background: scrolled ? "rgba(250,246,240,0.95)" : "transparent", backdropFilter: scrolled ? "blur(16px)" : "none", borderBottom: scrolled ? "1px solid rgba(107,79,58,0.1)" : "none", transition: "all 0.4s" }}>
-        <img src="/logo.svg" alt="יובל חסון" style={{ height: 80 }} onError={e => e.target.style.display = "none"} />
+        <img src="/logo.svg" alt="יובל חסון" style={{ height: 130 }} onError={e => e.target.style.display = "none"} />
         <div className="desktop-nav" style={{ gap: "1.8rem", alignItems: "center" }}>
           {NAV.map(n => (
             <button key={n.id} onClick={() => navTo(n.id)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--mid)", fontSize: "0.86rem", fontWeight: 500, fontFamily: "inherit", transition: "color 0.25s" }}
