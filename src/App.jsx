@@ -299,7 +299,7 @@ export default function App() {
           <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
             <button className="btn-wa" style={{ padding: "0.6rem 1.4rem", fontSize: "0.82rem" }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.103 1.514 5.829L.055 23.454a.75.75 0 0 0 .918.918l5.629-1.459A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.712 9.712 0 0 1-4.953-1.356l-.355-.211-3.681.955.977-3.578-.232-.368A9.712 9.712 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
-              צרי קשר
+              צרו קשר
             </button>
           </a>
         </div>
@@ -429,7 +429,7 @@ export default function App() {
                 <div className="service-card">
                   <div style={{ width: 52, height: 52, borderRadius: 8, background: "var(--linen)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.5rem", marginBottom: "1.2rem" }}>{s.icon}</div>
                   <h3 style={{ fontWeight: 700, marginBottom: "0.7rem", fontSize: "1rem" }}>{s.title}</h3>
-                  <p style={{ color: "var(--mid)", lineHeight: 1.8, fontSize: "0.9rem" }}>{s.text}</p>
+                  <p style={{ color: "var(--mid)", lineHeight: 1.8, fontSize: "0.9rem", whiteSpace: "pre-line" }}>{s.text}</p>
                 </div>
               </Reveal>
             ))}
@@ -455,7 +455,7 @@ export default function App() {
         {/* Header */}
         <div style={{ position: "relative", zIndex: 2, textAlign: "center", padding: "4rem 2rem 2.5rem" }}>
           <Reveal>
-            <p style={{ color: "rgba(250,246,240,0.6)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "1rem" }}>עבודות</p>
+            {/* <p style={{ color: "rgba(250,246,240,0.6)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "1rem" }}>עבודות</p> */}
             <h2 className="serif" style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)", fontWeight: 700, lineHeight: 1.1, color: "#FAF6F0" }}>
               העבודות שלנו<br />
               <span style={{ color: "rgba(250,246,240,0.75)", fontStyle: "italic" }}>מדברות בעד עצמן</span>
@@ -559,7 +559,7 @@ export default function App() {
             <div style={{ textAlign: "center", marginBottom: "4.5rem" }}>
               <p style={{ color: "var(--brown)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1rem" }}>איך עובדים יחד</p>
               <h2 className="serif" style={{ fontSize: "clamp(1.9rem, 4vw, 3rem)", fontWeight: 700, lineHeight: 1.2 }}>
-                תהליך הסושיאל<br /><span style={{ color: "var(--brown)" }}>תהליך ממכר</span>
+                תהליך הסושיאל —<br /><span style={{ color: "var(--brown)" }}>תהליך ממכר</span>
               </h2>
             </div>
           </Reveal>
@@ -570,7 +570,7 @@ export default function App() {
                   <div style={{ position: "absolute", top: 22, left: "-50%", width: "100%", height: 1, background: "rgba(107,79,58,0.18)", zIndex: 0 }} />
                   <div style={{ width: 44, height: 44, borderRadius: "50%", background: "var(--brown)", color: "#FAF6F0", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: "0.82rem", margin: "0 auto 1.4rem", position: "relative", zIndex: 1, boxShadow: "0 4px 14px rgba(107,79,58,0.3)" }}>{step.num}</div>
                   <h3 style={{ fontWeight: 700, marginBottom: "0.6rem", fontSize: "0.97rem" }}>{step.title}</h3>
-                  <p style={{ color: "var(--mid)", fontSize: "0.85rem", lineHeight: 1.75 }}>{step.text}</p>
+                  <p style={{ color: "var(--mid)", fontSize: "0.85rem", lineHeight: 1.75, whiteSpace: "pre-line" }}>{step.text}</p>
                 </div>
               </Reveal>
             ))}
