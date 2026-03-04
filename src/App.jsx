@@ -32,12 +32,8 @@ const WA_LINK = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("היי י
 
 // סרטוני/תמונות עבודות — הכניסי קבצים לתיקיית public/portfolio/
 const PORTFOLIO = [
-  { src: "/portfolio/work1.mp4",  thumb: "/portfolio/thumb1.jpg", type: "video", label: "טיקטוק",    client: "לקוח 1" },
-  { src: "/portfolio/work2.mp4",  thumb: "/portfolio/thumb2.jpg", type: "video", label: "אינסטגרם",  client: "לקוח 2" },
-  { src: "/portfolio/work3.jpg",  thumb: "/portfolio/work3.jpg",  type: "image", label: "מיתוג",     client: "לקוח 3" },
-  { src: "/portfolio/work4.mp4",  thumb: "/portfolio/thumb4.jpg", type: "video", label: "טיקטוק",    client: "לקוח 4" },
-  { src: "/portfolio/work5.jpg",  thumb: "/portfolio/work5.jpg",  type: "image", label: "אינסטגרם",  client: "לקוח 5" },
-  { src: "/portfolio/work6.mp4",  thumb: "/portfolio/thumb6.jpg", type: "video", label: "אינסטגרם",  client: "לקוח 6" },
+  { src: "/Portfolio/yuval1.mp4", thumb: "/Portfolio/yuval1.mp4", type: "video", label: "טיקטוק",   client: "עבודה 1" },
+  { src: "/Portfolio/yuval2.mp4", thumb: "/Portfolio/yuval2.mp4", type: "video", label: "אינסטגרם", client: "עבודה 2" },
 ];
 
 const REVIEWS = [
