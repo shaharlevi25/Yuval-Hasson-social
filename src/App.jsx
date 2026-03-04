@@ -737,7 +737,7 @@ export default function App() {
         </div>
       </section>
 
-*/}
+*/
             {/* ── FAQ ── */}
       <section id="faq" style={{ padding: "6rem 2rem" }}>
         <div style={{ maxWidth: 720, margin: "0 auto" }}>
