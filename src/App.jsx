@@ -43,7 +43,7 @@ const PORTFOLIO = [
 
 const REVIEWS = [
   {
-    text: "אני רוצה להמליץ על יובל! לפני מקצועיות ואיכות היא קודם כל בן אדם! מקשיבה, מכילה ומבינה את הצרכים של העסק, מקצועית ויצירתית עם מחשבה מחוץ לקופסה והתאמה לקונספט ולקהל היעד. והכי חשוב מביאה תוצאות והכל מתנהל בוייב פשוט מושלם. לא תתאכזבו, מומלצת!",
+    text: "אני רוצה להמליץ על יובל! לפני מקצועיות ואיכות היא קודם כל בת אדם! מקשיבה, מכילה ומבינה את הצרכים של העסק, מקצועית ויצירתית עם מחשבה מחוץ לקופסה והתאמה לקונספט ולקהל היעד. והכי חשוב מביאה תוצאות והכל מתנהל בוייב פשוט מושלם. לא תתאכזבו, מומלצת!",
     stars: 5,
   },
   {
@@ -391,7 +391,7 @@ export default function App() {
             <div>
               <p style={{ color: "var(--brown)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1rem" }}>מי אני</p>
               <h2 className="serif" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.7rem)", fontWeight: 700, lineHeight: 1.25, marginBottom: "1.8rem" }}>
-                פעם שלטי חוצות.<br /><span style={{ color: "var(--brown)" }}>היום הרשתות שלך.</span>
+                פעם שלטי חוצות.<br /><span style={{ color: "var(--brown)" }}>היום הרשתות החברתיות שלך.</span>
               </h2>
               <p style={{ color: "var(--mid)", lineHeight: 2, marginBottom: "1.2rem" }}>
                 אני צלמת ומשווקת ברשתות החברתיות.
