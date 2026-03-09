@@ -600,7 +600,7 @@ export default function App() {
           <Reveal delay={0.1}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 50px 1fr", alignItems: "stretch", marginTop: "3rem" }} className="ba-grid">
               <div className="ba-before" style={{ background: "var(--linen)", border: "1px solid rgba(107,79,58,0.12)", borderRadius: "8px 0 0 8px", padding: "2.2rem" }}>
-<div style={{ display: "flex", alignItems: "baseline", gap: "0.6rem", marginBottom: "1.4rem", flexWrap: "wrap" }}><p style={{ fontSize: "1.4rem", fontWeight: 900, color: "var(--brown)" }}>לפני</p><p style={{ fontSize: "0.82rem", color: "var(--light)" }}>(לפני שהתחלתם לעבוד איתי)</p></div>
+<div style={{ display: "flex", alignItems: "baseline", gap: "0.6rem", marginBottom: "1.4rem", flexWrap: "wrap" }}><p style={{ fontSize: "1.4rem", fontWeight: 900, color: "var(--brown)" }}>לפני</p><p style={{ fontSize: "0.82rem", color: "var(--light)" }}>(שהתחלתם לעבוד איתי)</p></div>
                 {["תוכן חובבני ולא עקבי","שפה שיווקית לא רציפה","חשיפה נמוכה","ללא אסטרטגיה"].map((t,i)=>(
                   <div key={i} style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "0.75rem" }}>
                     <span style={{ color: "#C4AFA5", fontSize: "0.8rem" }}>✕</span>
@@ -610,7 +610,7 @@ export default function App() {
               </div>
               <div className="ba-arrow" style={{ display: "flex", justifyContent: "center", alignItems: "center", background: "var(--brown)", color: "#FAF6F0", fontSize: "1.2rem" }}>←</div>
               <div className="ba-after" style={{ background: "var(--brown)", borderRadius: "0 8px 8px 0", padding: "2.2rem" }}>
-<div style={{ display: "flex", alignItems: "baseline", gap: "0.6rem", marginBottom: "1.4rem", flexWrap: "wrap" }}><p style={{ fontSize: "1.4rem", fontWeight: 900, color: "#FAF6F0" }}>אחרי</p><p style={{ fontSize: "0.82rem", color: "rgba(250,246,240,0.55)" }}>(אחרי שהתחלתם לעבוד איתי)</p></div>
+<div style={{ display: "flex", alignItems: "baseline", gap: "0.6rem", marginBottom: "1.4rem", flexWrap: "wrap" }}><p style={{ fontSize: "1.4rem", fontWeight: 900, color: "#FAF6F0" }}>אחרי</p><p style={{ fontSize: "0.82rem", color: "rgba(250,246,240,0.55)" }}>(שהתחלתם לעבוד איתי)</p></div>
                 {["תוכן עקבי עם מיתוג אחיד","צבע מותג בכל סרטון","חשיפות גבוהות ומעורבות קהל יעד","תוכן מקצועי ולא חובבני"].map((t,i)=>(
                   <div key={i} style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "0.75rem" }}>
                     <span style={{ color: "rgba(250,246,240,0.7)" }}>✓</span>
