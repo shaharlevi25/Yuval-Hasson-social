@@ -38,7 +38,7 @@ const PORTFOLIO = [
   { src: "/Portfolio/yuval4.mov", thumb: "/Portfolio/yuval4.mov", type: "video", label:  "מעצבת פנים 1"},
   { src: "/Portfolio/yuval5.mov", thumb: "/Portfolio/yuval5.mov", type: "video", label: "מעצבת פנים 2"},
   { src: "/Portfolio/yuval6.mov", thumb: "/Portfolio/yuval6.mov", type: "video", label: "טכנאי ומתקין מזגנים"},
-  { src: "/Portfolio/yuval7.mp4", thumb: "/Portfolio/yuval7.mov", type: "video", label: "טכנאי ומתקין מזגנים -רוסית"}
+  { src: "/Portfolio/yuval7.mov", thumb: "/Portfolio/yuval7.mov", type: "video", label: "טכנאי ומתקין מזגנים -רוסית"}
 ];
 
 const REVIEWS = [
