@@ -30,7 +30,7 @@ function Reveal({ children, delay = 0, y = 28 }) {
 const WA_NUMBER = "972549422502";
 const WA_LINK = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("היי יובל! אשמח לשמוע עוד פרטים 😊")}`;
 
-// סרטוני/תמונות עבודות — הכניסי קבצים לתיקיית public/portfolio/
+// סרטוני/תמונות עבודות — תכניס קבצים לתיקיית public/portfolio/
 const PORTFOLIO = [
   { src: "/Portfolio/yuval1.mov", thumb: "/Portfolio/yuval1.mov", type: "video", label: "סטודיו איגרוף ואימוני כוח" },
   { src: "/Portfolio/yuval2.mp4", thumb: "/Portfolio/yuval2.mp4", type: "video", label: "חנות ספורט לשחקני כדורגל"},
