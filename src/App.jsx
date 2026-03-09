@@ -28,7 +28,7 @@ function Reveal({ children, delay = 0, y = 28 }) {
 }
 
 const WA_NUMBER = "972549422502";
-const WA_LINK = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("היי יובל! ראיתי את דף הנחיתה שלך ורציתי לשמוע עוד 😊")}`;
+const WA_LINK = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("היי יובל! אשמח לשמוע עוד פרטים 😊")}`;
 
 // סרטוני/תמונות עבודות — הכניסי קבצים לתיקיית public/portfolio/
 const PORTFOLIO = [
