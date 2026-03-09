@@ -32,13 +32,13 @@ const WA_LINK = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("היי י
 
 // סרטוני/תמונות עבודות — הכניסי קבצים לתיקיית public/portfolio/
 const PORTFOLIO = [
-  { src: "/Portfolio/yuval1.mp4", thumb: "/Portfolio/yuval1.mp4", type: "video", label: "טיקטוק" },
-  { src: "/Portfolio/yuval2.mp4", thumb: "/Portfolio/yuval2.mp4", type: "video", label: "אינסטגרם", client: "עבודה 2" },
-  { src: "/Portfolio/yuval2.mp4", thumb: "/Portfolio/yuval2.mp4", type: "video", label: "אינסטגרם", client: "עבודה 2" },
-  { src: "/Portfolio/yuval2.mp4", thumb: "/Portfolio/yuval2.mp4", type: "video", label: "אינסטגרם", client: "עבודה 2" },
-  { src: "/Portfolio/yuval2.mp4", thumb: "/Portfolio/yuval2.mp4", type: "video", label: "אינסטגרם", client: "עבודה 2" },
-  { src: "/Portfolio/yuval2.mp4", thumb: "/Portfolio/yuval2.mp4", type: "video", label: "אינסטגרם", client: "עבודה 2" },
-  { src: "/Portfolio/yuval2.mp4", thumb: "/Portfolio/yuval2.mp4", type: "video", label: "אינסטגרם", client: "עבודה 2" },
+  { src: "/Portfolio/yuval1.mp4", thumb: "/Portfolio/yuval1.mp4", type: "video", label: "סטודיו איגרוף ואימוני כוח" },
+  { src: "/Portfolio/yuval2.mp4", thumb: "/Portfolio/yuval2.mp4", type: "video", label: "חנות ספורט לשחקני כדורגל"},
+  { src: "/Portfolio/yuval2.mp4", thumb: "/Portfolio/yuval3.mp4", type: "video", label: "מפיק אירועים"},
+  { src: "/Portfolio/yuval2.mp4", thumb: "/Portfolio/yuval4.mp4", type: "video", label:  "מעצבת פנים 1"},
+  { src: "/Portfolio/yuval2.mp4", thumb: "/Portfolio/yuval5.mp4", type: "video", label: "מעצבת פנים 2"},
+  { src: "/Portfolio/yuval2.mp4", thumb: "/Portfolio/yuval6.mp4", type: "video", label: "טכנאי ומתקין מזגנים"},
+  { src: "/Portfolio/yuval2.mp4", thumb: "/Portfolio/yuval7.mp4", type: "video", label: "טכנאי ומתקין מזגנים -רוסית"}
 ];
 
 const REVIEWS = [
